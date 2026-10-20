@@ -168,3 +168,16 @@ This work builds on:
 ## Author
 
 **Arghavan Fotouhi**, supervised by Dr. Seyed Saleh Etemadi, School of Computer Engineering, Iran University of Science and Technology.
+## License and Attribution
+
+This project builds upon [MedRAG](https://github.com/gzxiong/MedRAG) and its iterative variant, i-MedRAG.
+
+The original MedRAG repository includes a `LICENSE` file containing a Public Domain Notice attributed to the National Center for Biotechnology Information (NCBI).
+
+This project adds the Adaptive-k retrieval method and related modifications as part of a bachelor's final project at Iran University of Science and Technology.
+
+For the original MedRAG work, please cite:
+
+Xiong, Guangzhi, Qiao Jin, Zhiyong Lu, and Aidong Zhang. *Benchmarking Retrieval-Augmented Generation for Medicine*. Findings of ACL 2024.
+
+For details about the original implementation, see the [MedRAG repository](https://github.com/gzxiong/MedRAG).
