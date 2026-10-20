@@ -72,8 +72,8 @@ This project extends the original MedRAG code base. Besides the two files above,
 Adaptive retrieval additionally needs `RetrievalSystem.retrieve_with_embeddings(question, k, rrf_k)`, which returns `(snippets, scores, ids, embeddings)`. It is supported only for **exactly one dense retriever and one corpus** (e.g. MedCPT + Textbooks), because novelty is computed from the retriever's embeddings.
 
 ```bash
-git clone https://github.com/<your-username>/<your-repo>.git
-cd <your-repo>
+git clone https://github.com/<arghavanfotouhi>/<AdaptiveMedRAG_BS_FinalProject>.git
+cd <AdaptiveMedRAG_BS_FinalProject>
 pip install -r requirements.txt   # torch, transformers, openai>=1.0, tiktoken, tqdm, numpy, ...
 ```
 
