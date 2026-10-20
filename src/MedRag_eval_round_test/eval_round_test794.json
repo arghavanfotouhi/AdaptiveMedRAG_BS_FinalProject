@@ -1,0 +1,137 @@
+[
+  {
+    "sample_id": 0,
+    "question": "A 37-year-old man presents to his primary care provider with dysphagia. He notes that his symptoms began several weeks ago and have worsened over time. He now has trouble swallowing solids and liquids. He denies any other symptoms. He has no significant past medical history. Travel history reveals a recent trip to South America but no other travel outside the United States. His temperature is 100°F (37.8°C), blood pressure is 120/81 mmHg, pulse is 99/min, respirations are 14/min, and oxygen saturation is 98% on room air. HEENT exam is unremarkable. He has no palpable masses in his abdomen. What is the most appropriate next step in management?",
+    "ground_truth": "A",
+    "retrieved_ids": [
+      "InternalMed_Harrison_19190",
+      "InternalMed_Harrison_12",
+      "InternalMed_Harrison_6",
+      "InternalMed_Harrison_205",
+      "InternalMed_Harrison_2955",
+      "InternalMed_Harrison_9489",
+      "Surgery_Schwartz_1255",
+      "InternalMed_Harrison_216",
+      "InternalMed_Harrison_9482",
+      "InternalMed_Harrison_3047",
+      "InternalMed_Harrison_1703",
+      "Anatomy_Gray_562",
+      "InternalMed_Harrison_2810",
+      "InternalMed_Harrison_19943",
+      "InternalMed_Harrison_20212",
+      "InternalMed_Harrison_1724",
+      "InternalMed_Harrison_9474",
+      "InternalMed_Harrison_201",
+      "InternalMed_Harrison_20409",
+      "InternalMed_Harrison_11627",
+      "InternalMed_Harrison_17049",
+      "InternalMed_Harrison_17048",
+      "InternalMed_Harrison_15",
+      "InternalMed_Harrison_27",
+      "Anatomy_Gray_581",
+      "InternalMed_Harrison_9472",
+      "InternalMed_Harrison_1345",
+      "InternalMed_Harrison_203",
+      "InternalMed_Harrison_3283",
+      "InternalMed_Harrison_3597",
+      "InternalMed_Harrison_18858",
+      "InternalMed_Harrison_17403"
+    ],
+    "retrieve_latency_sec": 4.28,
+    "selected_k": 8,
+    "stop_reason": "clean",
+    "history": [
+      {
+        "k": 4,
+        "new_documents": 4,
+        "document_ids": [
+          "InternalMed_Harrison_19190",
+          "InternalMed_Harrison_12",
+          "InternalMed_Harrison_6",
+          "InternalMed_Harrison_205"
+        ],
+        "mean_new_novelty": 0.10052082687616348,
+        "min_new_novelty": 0.075111985206604,
+        "max_new_novelty": 0.13550221920013428,
+        "judge_decision": "CONTINUE",
+        "supported_option": null,
+        "requirements": [
+          {
+            "id": "R1",
+            "text": "Establish the appropriate initial diagnostic approach for a patient presenting with progressive dysphagia to solids and liquids without other significant symptoms or physical exam findings.",
+            "critical": true,
+            "status": "UNRESOLVED",
+            "supporting_documents": [],
+            "justification": "None of the retrieved documents specifically address the diagnostic evaluation or management of dysphagia or the appropriate next step in such a clinical scenario.",
+            "option_leakage": false
+          }
+        ],
+        "missing_requirements": [
+          {
+            "id": "R1",
+            "text": "Establish the appropriate initial diagnostic approach for a patient presenting with progressive dysphagia to solids and liquids without other significant symptoms or physical exam findings.",
+            "critical": true,
+            "status": "UNRESOLVED",
+            "supporting_documents": [],
+            "justification": "None of the retrieved documents specifically address the diagnostic evaluation or management of dysphagia or the appropriate next step in such a clinical scenario.",
+            "option_leakage": false
+          }
+        ],
+        "stop_reason": null,
+        "reason": "The evidence set lacks any direct or specific information about the evaluation or management of dysphagia, so it does not support or distinguish any of the answer options.",
+        "stagnated": false,
+        "stagnation_reason": null
+      },
+      {
+        "k": 8,
+        "new_documents": 4,
+        "document_ids": [
+          "InternalMed_Harrison_19190",
+          "InternalMed_Harrison_12",
+          "InternalMed_Harrison_6",
+          "InternalMed_Harrison_205",
+          "InternalMed_Harrison_2955",
+          "InternalMed_Harrison_9489",
+          "Surgery_Schwartz_1255",
+          "InternalMed_Harrison_216"
+        ],
+        "mean_new_novelty": 0.11520160734653473,
+        "min_new_novelty": 0.0553438663482666,
+        "max_new_novelty": 0.19853734970092773,
+        "judge_decision": "STOP",
+        "supported_option": "B",
+        "requirements": [
+          {
+            "id": "R1",
+            "text": "Establish the appropriate initial diagnostic approach for a patient presenting with progressive dysphagia to solids and liquids without other significant symptoms or physical exam findings.",
+            "critical": true,
+            "status": "RESOLVED",
+            "supporting_documents": [
+              6,
+              8
+            ],
+            "justification": "The documents provide guidance on the selection of initial tests based on the patient's history and physical examination findings, which supports the requirement for determining the diagnostic approach for dysphagia.",
+            "option_leakage": false
+          }
+        ],
+        "missing_requirements": [],
+        "stop_reason": "clean",
+        "reason": "The requirement was resolved by the evidence indicating the need for a specific diagnostic approach, and the supported option is clearly distinguished from others based on the clinical context provided.",
+        "stagnated": false,
+        "stagnation_reason": null
+      }
+    ],
+    "pred_adaptive": "B",
+    "correct_adaptive": false,
+    "raw_answer_adaptive": "{ \"step_by_step_thinking\": \"The patient presents with dysphagia that has worsened over several weeks, indicating a potential structural or functional issue in the esophagus. Given the recent travel history to South America, one possible concern is Chagas disease, which can lead to esophageal motility disorders. The patient's vital signs are stable, and the HEENT exam is unremarkable, suggesting that the dysphagia is not due to an acute infectious process or obstruction. The next appropriate step in management would be to perform an endoscopy (B) to directly visualize the esophagus and assess for any abnormalities, such as strictures or lesions, and to rule out any serious conditions. A barium swallow (A) could also provide information about esophageal motility but is less definitive than endoscopy. Myotomy (C) is a surgical procedure that would not be appropriate at this stage without further investigation. Nifurtimox (D) is a treatment for Chagas disease but would not be initiated without confirming the diagnosis. Therefore, the most appropriate next step is endoscopy (B).\", \"answer_choice\": \"B\" }",
+    "json_response_adaptive": "{\"answer\": \"B\"}",
+    "adaptive_latency_sec": 21.42,
+    "pred_baseline": "B",
+    "correct_baseline": false,
+    "raw_answer_baseline": "{ \"step_by_step_thinking\": \"The patient presents with dysphagia that has worsened over several weeks, affecting both solids and liquids. Given the recent travel history to South America, there is a possibility of an infectious etiology, such as Chagas disease, which can cause esophageal motility disorders leading to dysphagia. The patient's vital signs are stable, and the HEENT exam is unremarkable, suggesting that the dysphagia is not due to an acute obstruction or local pathology. The next appropriate step in management would be to perform an endoscopy (B) to directly visualize the esophagus and assess for any structural abnormalities or signs of infection. A barium swallow (A) could also provide information about motility but is less definitive than endoscopy. Myotomy (C) is a surgical procedure typically reserved for achalasia and would not be appropriate at this stage. Nifurtimox (D) is a treatment for Chagas disease but would not be initiated without a confirmed diagnosis. Therefore, the most appropriate next step is endoscopy (B).\", \"answer_choice\": \"B\" }",
+    "json_response_baseline": "{\"answer\": \"B\"}",
+    "baseline_latency_sec": 16.69,
+    "same_docs_as_baseline": false,
+    "answer_changed_vs_baseline": false
+  }
+]

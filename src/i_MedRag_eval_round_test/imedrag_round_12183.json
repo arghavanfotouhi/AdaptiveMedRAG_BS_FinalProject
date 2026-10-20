@@ -1,0 +1,179 @@
+{
+  "round": 11183,
+  "start": 400,
+  "n_samples_requested": 50,
+  "n_samples_completed": 1,
+  "config": {
+    "baseline_k32": {
+      "adaptive": false,
+      "k": 32
+    },
+    "adaptive_4_8_16_32": {
+      "adaptive": true,
+      "k": 32,
+      "adaptive_k_schedule": [
+        4,
+        8,
+        16,
+        32
+      ]
+    }
+  },
+  "results": {
+    "baseline_k32": [
+      {
+        "round": 11183,
+        "idx": 0,
+        "dataset_idx": 400,
+        "config": "baseline_k32",
+        "gold": "A",
+        "pred": "A",
+        "correct": true,
+        "unparsed": false,
+        "raw_output": "```json\n{\"answer\": \"A\"}\n```",
+        "error": null,
+        "seconds": 48.993,
+        "adaptive_log": [],
+        "selected_ks": [],
+        "judge_calls": 0,
+        "stop_reasons": []
+      }
+    ],
+    "adaptive_4_8_16_32": [
+      {
+        "round": 11183,
+        "idx": 0,
+        "dataset_idx": 400,
+        "config": "adaptive_4_8_16_32",
+        "gold": "A",
+        "pred": "A",
+        "correct": true,
+        "unparsed": false,
+        "raw_output": "```json\n{\"answer\": \"A\"}\n```",
+        "error": null,
+        "seconds": 49.545,
+        "adaptive_log": [
+          {
+            "query": "What is the role of ADAMTS13 in the pathophysiology of Thrombotic Thrombocytopenic Purpura (TTP)?",
+            "selected_k": 4,
+            "max_k": 32,
+            "judge_calls": 1,
+            "stop_reason": "clean",
+            "history": [
+              {
+                "k": 4,
+                "new_documents": 4,
+                "document_ids": [
+                  "Pathology_Robbins_3007",
+                  "Pathoma_Husain_81",
+                  "InternalMed_Harrison_9157",
+                  "Neurology_Adams_6837"
+                ],
+                "mean_new_novelty": 0.1350153237581253,
+                "min_new_novelty": 0.10923141241073608,
+                "max_new_novelty": 0.16992849111557007,
+                "judge_decision": "STOP",
+                "supported_option": null,
+                "requirements": [
+                  {
+                    "id": "R1",
+                    "text": "Establish the role of ADAMTS13 in the cleavage of von Willebrand factor (vWF) multimers.",
+                    "critical": true,
+                    "status": "RESOLVED",
+                    "supporting_documents": [
+                      2,
+                      3
+                    ],
+                    "justification": "Documents 2 and 3 explicitly describe how ADAMTS13 cleaves vWF multimers, which is essential to understanding its role in TTP.",
+                    "option_leakage": false
+                  },
+                  {
+                    "id": "R2",
+                    "text": "Determine the consequences of decreased ADAMTS13 activity in the context of thrombotic thrombocytopenic purpura (TTP).",
+                    "critical": true,
+                    "status": "RESOLVED",
+                    "supporting_documents": [
+                      2,
+                      4
+                    ],
+                    "justification": "Documents 2 and 4 detail the consequences of decreased ADAMTS13 activity, linking it to the pathophysiology of TTP.",
+                    "option_leakage": false
+                  }
+                ],
+                "missing_requirements": [],
+                "stop_reason": "clean",
+                "reason": "The evidence establishes the role and consequences of ADAMTS13 in TTP but does not lead to a definitive answer choice.",
+                "stagnated": false,
+                "stagnation_reason": null
+              }
+            ]
+          },
+          {
+            "query": "What are the common laboratory findings and clinical features associated with TTP?",
+            "selected_k": 4,
+            "max_k": 32,
+            "judge_calls": 1,
+            "stop_reason": "clean",
+            "history": [
+              {
+                "k": 4,
+                "new_documents": 4,
+                "document_ids": [
+                  "InternalMed_Harrison_21963",
+                  "Pathology_Robbins_2970",
+                  "Pathology_Robbins_2972",
+                  "Pathoma_Husain_81"
+                ],
+                "mean_new_novelty": 0.10636790841817856,
+                "min_new_novelty": 0.07457375526428223,
+                "max_new_novelty": 0.13443583250045776,
+                "judge_decision": "STOP",
+                "supported_option": null,
+                "requirements": [
+                  {
+                    "id": "R1",
+                    "text": "Establish the common clinical features associated with thrombotic thrombocytopenic purpura (TTP).",
+                    "critical": true,
+                    "status": "RESOLVED",
+                    "supporting_documents": [
+                      1,
+                      2
+                    ],
+                    "justification": "Documents 1 and 2 provide specific clinical features associated with TTP, including fever, thrombocytopenia, microangiopathic hemolytic anemia, transient neurologic deficits, and renal failure.",
+                    "option_leakage": false
+                  },
+                  {
+                    "id": "R2",
+                    "text": "Identify the common laboratory findings associated with thrombotic thrombocytopenic purpura (TTP).",
+                    "critical": true,
+                    "status": "RESOLVED",
+                    "supporting_documents": [
+                      3,
+                      4
+                    ],
+                    "justification": "Documents 3 and 4 specify that coagulation tests such as PT and PTT are usually normal in TTP, which is a relevant laboratory finding.",
+                    "option_leakage": false
+                  }
+                ],
+                "missing_requirements": [],
+                "stop_reason": "clean",
+                "reason": "The requirements are fully supported by the evidence, but no specific option is favored as the evidence does not differentiate between potential answer choices.",
+                "stagnated": false,
+                "stagnation_reason": null
+              }
+            ]
+          }
+        ],
+        "selected_ks": [
+          4,
+          4
+        ],
+        "judge_calls": 2,
+        "stop_reasons": [
+          "clean",
+          "clean"
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,330 @@
+{
+  "round": 13439,
+  "start": 400,
+  "n_samples_requested": 50,
+  "n_samples_completed": 1,
+  "config": {
+    "baseline_k32": {
+      "adaptive": false,
+      "k": 32
+    },
+    "adaptive_4_8_16_32": {
+      "adaptive": true,
+      "k": 32,
+      "adaptive_k_schedule": [
+        4,
+        8,
+        16,
+        32
+      ]
+    }
+  },
+  "results": {
+    "baseline_k32": [
+      {
+        "round": 13439,
+        "idx": 0,
+        "dataset_idx": 400,
+        "config": "baseline_k32",
+        "gold": "C",
+        "pred": "C",
+        "correct": true,
+        "unparsed": false,
+        "raw_output": "```json\n{\"answer\": \"C\"}\n```",
+        "error": null,
+        "seconds": 34.65,
+        "adaptive_log": [],
+        "selected_ks": [],
+        "judge_calls": 0,
+        "stop_reasons": []
+      }
+    ],
+    "adaptive_4_8_16_32": [
+      {
+        "round": 13439,
+        "idx": 0,
+        "dataset_idx": 400,
+        "config": "adaptive_4_8_16_32",
+        "gold": "C",
+        "pred": "C",
+        "correct": true,
+        "unparsed": false,
+        "raw_output": "```json\n{\"answer\": \"C\"}\n```",
+        "error": null,
+        "seconds": 46.938,
+        "adaptive_log": [
+          {
+            "query": "What are the indications and outcomes of sphincterotomy in patients with suspected sphincter of Oddi dysfunction?",
+            "selected_k": 8,
+            "max_k": 32,
+            "judge_calls": 2,
+            "stop_reason": "stagnation:novelty_saturated",
+            "history": [
+              {
+                "k": 4,
+                "new_documents": 4,
+                "document_ids": [
+                  "Surgery_Schwartz_9718",
+                  "InternalMed_Harrison_24271",
+                  "InternalMed_Harrison_24270",
+                  "Surgery_Schwartz_9709"
+                ],
+                "mean_new_novelty": 0.1579824686050415,
+                "min_new_novelty": 0.10481882095336914,
+                "max_new_novelty": 0.21945106983184814,
+                "judge_decision": "CONTINUE",
+                "supported_option": null,
+                "requirements": [
+                  {
+                    "id": "R1",
+                    "text": "Establish the clinical indications for performing sphincterotomy in patients with suspected sphincter of Oddi dysfunction.",
+                    "critical": true,
+                    "status": "RESOLVED",
+                    "supporting_documents": [
+                      2,
+                      3
+                    ],
+                    "justification": "Documents 2 and 3 provide specific criteria and factors that indicate when sphincterotomy may be indicated for patients with suspected sphincter of Oddi dysfunction.",
+                    "option_leakage": false
+                  },
+                  {
+                    "id": "R2",
+                    "text": "Determine the outcomes associated with sphincterotomy in patients with suspected sphincter of Oddi dysfunction.",
+                    "critical": true,
+                    "status": "PARTIALLY_RESOLVED",
+                    "supporting_documents": [
+                      4
+                    ],
+                    "justification": "Document 4 discusses the risks and complications associated with sphincterotomy, but does not provide comprehensive outcomes data.",
+                    "option_leakage": false
+                  }
+                ],
+                "missing_requirements": [
+                  {
+                    "id": "R2",
+                    "text": "Determine the outcomes associated with sphincterotomy in patients with suspected sphincter of Oddi dysfunction.",
+                    "critical": true,
+                    "status": "PARTIALLY_RESOLVED",
+                    "supporting_documents": [
+                      4
+                    ],
+                    "justification": "Document 4 discusses the risks and complications associated with sphincterotomy, but does not provide comprehensive outcomes data.",
+                    "option_leakage": false
+                  }
+                ],
+                "stop_reason": null,
+                "reason": "While the indications for sphincterotomy are well-supported, the outcomes remain partially resolved, preventing a clear distinction between options.",
+                "stagnated": false,
+                "stagnation_reason": null
+              },
+              {
+                "k": 8,
+                "new_documents": 4,
+                "document_ids": [
+                  "Surgery_Schwartz_9718",
+                  "InternalMed_Harrison_24271",
+                  "InternalMed_Harrison_24270",
+                  "Surgery_Schwartz_9709",
+                  "Surgery_Schwartz_9644",
+                  "Surgery_Schwartz_9450",
+                  "Surgery_Schwartz_9370",
+                  "Surgery_Schwartz_9619"
+                ],
+                "mean_new_novelty": 0.1332896202802658,
+                "min_new_novelty": 0.11137408018112183,
+                "max_new_novelty": 0.15971744060516357,
+                "judge_decision": "CONTINUE",
+                "supported_option": null,
+                "requirements": [
+                  {
+                    "id": "R1",
+                    "text": "Establish the clinical indications for performing sphincterotomy in patients with suspected sphincter of Oddi dysfunction.",
+                    "critical": true,
+                    "status": "RESOLVED",
+                    "supporting_documents": [
+                      2,
+                      3
+                    ],
+                    "justification": "Documents 2 and 3 provide specific criteria and indications for sphincterotomy in patients with suspected sphincter of Oddi dysfunction.",
+                    "option_leakage": false
+                  },
+                  {
+                    "id": "R2",
+                    "text": "Determine the outcomes associated with sphincterotomy in patients with suspected sphincter of Oddi dysfunction.",
+                    "critical": true,
+                    "status": "PARTIALLY_RESOLVED",
+                    "supporting_documents": [
+                      4,
+                      5
+                    ],
+                    "justification": "Documents 4 and 5 discuss complications and outcomes related to sphincterotomy, but do not provide comprehensive outcome data.",
+                    "option_leakage": false
+                  }
+                ],
+                "missing_requirements": [
+                  {
+                    "id": "R2",
+                    "text": "Determine the outcomes associated with sphincterotomy in patients with suspected sphincter of Oddi dysfunction.",
+                    "critical": true,
+                    "status": "PARTIALLY_RESOLVED",
+                    "supporting_documents": [
+                      4,
+                      5
+                    ],
+                    "justification": "Documents 4 and 5 discuss complications and outcomes related to sphincterotomy, but do not provide comprehensive outcome data.",
+                    "option_leakage": false
+                  }
+                ],
+                "stop_reason": null,
+                "reason": "While the indications for sphincterotomy are well-supported, the outcomes remain partially resolved, preventing a definitive conclusion about the best option.",
+                "stagnated": true,
+                "stagnation_reason": "novelty_saturated"
+              }
+            ]
+          },
+          {
+            "query": "What are the common complications associated with pancreaticoduodenectomy in patients with biliary colic symptoms?",
+            "selected_k": 8,
+            "max_k": 32,
+            "judge_calls": 2,
+            "stop_reason": "stagnation:novelty_saturated",
+            "history": [
+              {
+                "k": 4,
+                "new_documents": 4,
+                "document_ids": [
+                  "Surgery_Schwartz_9724",
+                  "Surgery_Schwartz_9290",
+                  "Surgery_Schwartz_8246",
+                  "Surgery_Schwartz_9847"
+                ],
+                "mean_new_novelty": 0.15504752099514008,
+                "min_new_novelty": 0.1234167218208313,
+                "max_new_novelty": 0.19985002279281616,
+                "judge_decision": "CONTINUE",
+                "supported_option": null,
+                "requirements": [
+                  {
+                    "id": "R1",
+                    "text": "Establish the common complications associated with pancreaticoduodenectomy.",
+                    "critical": true,
+                    "status": "PARTIALLY_RESOLVED",
+                    "supporting_documents": [
+                      4
+                    ],
+                    "justification": "Document 4 discusses complications such as pancreatic leakage and its consequences, which are relevant to pancreaticoduodenectomy.",
+                    "option_leakage": false
+                  },
+                  {
+                    "id": "R2",
+                    "text": "Determine the incidence of complications following pancreaticoduodenectomy.",
+                    "critical": true,
+                    "status": "UNRESOLVED",
+                    "supporting_documents": [],
+                    "justification": "No documents provide specific incidence rates for complications following pancreaticoduodenectomy.",
+                    "option_leakage": false
+                  }
+                ],
+                "missing_requirements": [
+                  {
+                    "id": "R1",
+                    "text": "Establish the common complications associated with pancreaticoduodenectomy.",
+                    "critical": true,
+                    "status": "PARTIALLY_RESOLVED",
+                    "supporting_documents": [
+                      4
+                    ],
+                    "justification": "Document 4 discusses complications such as pancreatic leakage and its consequences, which are relevant to pancreaticoduodenectomy.",
+                    "option_leakage": false
+                  },
+                  {
+                    "id": "R2",
+                    "text": "Determine the incidence of complications following pancreaticoduodenectomy.",
+                    "critical": true,
+                    "status": "UNRESOLVED",
+                    "supporting_documents": [],
+                    "justification": "No documents provide specific incidence rates for complications following pancreaticoduodenectomy.",
+                    "option_leakage": false
+                  }
+                ],
+                "stop_reason": null,
+                "reason": "The evidence partially addresses the complications but does not provide sufficient detail on incidence or a comprehensive list of complications.",
+                "stagnated": false,
+                "stagnation_reason": null
+              },
+              {
+                "k": 8,
+                "new_documents": 4,
+                "document_ids": [
+                  "Surgery_Schwartz_9724",
+                  "Surgery_Schwartz_9290",
+                  "Surgery_Schwartz_8246",
+                  "Surgery_Schwartz_9847",
+                  "Surgery_Schwartz_9291",
+                  "First_Aid_Step2_334",
+                  "Surgery_Schwartz_9322",
+                  "Surgery_Schwartz_9815"
+                ],
+                "mean_new_novelty": 0.12794826924800873,
+                "min_new_novelty": 0.07623493671417236,
+                "max_new_novelty": 0.18533968925476074,
+                "judge_decision": "CONTINUE",
+                "supported_option": null,
+                "requirements": [
+                  {
+                    "id": "R1",
+                    "text": "Establish the common complications associated with pancreaticoduodenectomy.",
+                    "critical": true,
+                    "status": "RESOLVED",
+                    "supporting_documents": [
+                      4
+                    ],
+                    "justification": "Document 4 discusses complications such as pancreatic leakage and the potential for abscess formation, which are common complications associated with pancreaticoduodenectomy.",
+                    "option_leakage": false
+                  },
+                  {
+                    "id": "R2",
+                    "text": "Determine the incidence of complications following pancreaticoduodenectomy.",
+                    "critical": true,
+                    "status": "PARTIALLY_RESOLVED",
+                    "supporting_documents": [
+                      4
+                    ],
+                    "justification": "Document 4 provides information on the rate of pancreatic leakage, but does not provide a comprehensive incidence rate for all complications.",
+                    "option_leakage": false
+                  }
+                ],
+                "missing_requirements": [
+                  {
+                    "id": "R2",
+                    "text": "Determine the incidence of complications following pancreaticoduodenectomy.",
+                    "critical": true,
+                    "status": "PARTIALLY_RESOLVED",
+                    "supporting_documents": [
+                      4
+                    ],
+                    "justification": "Document 4 provides information on the rate of pancreatic leakage, but does not provide a comprehensive incidence rate for all complications.",
+                    "option_leakage": false
+                  }
+                ],
+                "stop_reason": null,
+                "reason": "While some complications are identified, the evidence does not provide a complete overview or incidence rates that would allow for a definitive conclusion on the common complications.",
+                "stagnated": true,
+                "stagnation_reason": "novelty_saturated"
+              }
+            ]
+          }
+        ],
+        "selected_ks": [
+          8,
+          8
+        ],
+        "judge_calls": 4,
+        "stop_reasons": [
+          "stagnation:novelty_saturated",
+          "stagnation:novelty_saturated"
+        ]
+      }
+    ]
+  }
+}

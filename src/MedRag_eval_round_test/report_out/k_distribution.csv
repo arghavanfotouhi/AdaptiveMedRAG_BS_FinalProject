@@ -1,0 +1,13 @@
+file,k=4 (count),k=8 (count),k=16 (count),k=32 (count),k=4 (%),k=8 (%),k=16 (%),k=32 (%)
+eval_round_test1.json,8,60,25,7,8.0,60.0,25.0,7.0
+eval_round_test10.json,6,60,21,13,6.0,60.0,21.0,13.0
+eval_round_test2.json,7,59,16,18,7.0,59.0,16.0,18.0
+eval_round_test3.json,9,60,17,14,9.0,60.0,17.0,14.0
+eval_round_test4.json,12,62,15,11,12.0,62.0,15.0,11.0
+eval_round_test5.json,7,66,15,12,7.0,66.0,15.0,12.0
+eval_round_test6.json,8,65,20,7,8.0,65.0,20.0,7.0
+eval_round_test7.json,12,63,12,12,12.1,63.6,12.1,12.1
+eval_round_test794.json,0,1,0,0,0.0,100.0,0.0,0.0
+eval_round_test8.json,11,63,14,12,11.0,63.0,14.0,12.0
+eval_round_test9.json,12,64,17,7,12.0,64.0,17.0,7.0
+POOLED,92,623,172,113,9.2,62.3,17.2,11.3

@@ -1,0 +1,17 @@
+adaptive_config,file,clean (count),max_k (count),stagnation:novelty_saturated (count),stagnation:snapshot_identical (count),clean (%),max_k (%),stagnation:novelty_saturated (%),stagnation:snapshot_identical (%)
+adaptive_4_8_16_32,imedrag_round_1.json,60,0,34,6,60.0,0.0,34.0,6.0
+adaptive_4_8_16_32,imedrag_round_10.json,51,4,42,1,52.0,4.1,42.9,1.0
+adaptive_4_8_16_32,imedrag_round_11161.json,1,0,1,0,50.0,0.0,50.0,0.0
+adaptive_4_8_16_32,imedrag_round_12183.json,2,0,0,0,100.0,0.0,0.0,0.0
+adaptive_4_8_16_32,imedrag_round_13439.json,0,0,2,0,0.0,0.0,100.0,0.0
+adaptive_4_8_16_32,imedrag_round_14440.json,0,0,2,0,0.0,0.0,100.0,0.0
+adaptive_4_8_16_32,imedrag_round_15459.json,1,0,1,0,50.0,0.0,50.0,0.0
+adaptive_4_8_16_32,imedrag_round_2.json,64,2,31,3,64.0,2.0,31.0,3.0
+adaptive_4_8_16_32,imedrag_round_3.json,59,3,31,5,60.2,3.1,31.6,5.1
+adaptive_4_8_16_32,imedrag_round_4.json,60,2,31,3,62.5,2.1,32.3,3.1
+adaptive_4_8_16_32,imedrag_round_5.json,59,3,35,3,59.0,3.0,35.0,3.0
+adaptive_4_8_16_32,imedrag_round_6.json,64,1,32,2,64.6,1.0,32.3,2.0
+adaptive_4_8_16_32,imedrag_round_7.json,65,5,26,4,65.0,5.0,26.0,4.0
+adaptive_4_8_16_32,imedrag_round_8.json,50,2,43,5,50.0,2.0,43.0,5.0
+adaptive_4_8_16_32,imedrag_round_9.json,59,0,37,0,61.5,0.0,38.5,0.0
+adaptive_4_8_16_32,POOLED,595,22,348,32,59.7,2.2,34.9,3.2

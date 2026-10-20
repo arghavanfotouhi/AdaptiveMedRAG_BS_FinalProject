@@ -1,0 +1,1080 @@
+{
+  "baseline_k": 32,
+  "margins_pp": [
+    2.0,
+    3.0
+  ],
+  "alpha": 0.05,
+  "adaptive_4_8_16_32": {
+    "per_file": {
+      "imedrag_round_1.json": {
+        "n": 50,
+        "n_retrieval_calls": 100,
+        "acc_baseline": 0.82,
+        "acc_adaptive": 0.9,
+        "correct_baseline": 41,
+        "correct_adaptive": 45,
+        "ci_baseline": [
+          0.6920368054529739,
+          0.902299172675462
+        ],
+        "ci_adaptive": [
+          0.7863950966521162,
+          0.956524876008429
+        ],
+        "only_baseline_correct": 0,
+        "only_adaptive_correct": 4,
+        "mcnemar_p": 0.125,
+        "noninferiority": {
+          "diff_pp": 8.0,
+          "ci_wald_pp": [
+            0.48027435070816527,
+            15.519725649291836
+          ],
+          "ci_tango_pp": [
+            0.2944593584957744,
+            18.838246918342833
+          ],
+          "alpha": 0.05,
+          "tests": [
+            {
+              "margin_pp": 2.0,
+              "p_wald": 0.004574573789796865,
+              "p_tango": 0.01194885392055589,
+              "noninferior_wald": true,
+              "noninferior_tango": true
+            },
+            {
+              "margin_pp": 3.0,
+              "p_wald": 0.002071435933361787,
+              "p_tango": 0.0086282211844666,
+              "noninferior_wald": true,
+              "noninferior_tango": true
+            }
+          ]
+        },
+        "docs_per_question_baseline": 64.0,
+        "docs_per_question_adaptive": 15.6,
+        "docs_per_question_reduction_pct": 75.625,
+        "docs_per_retrieval_baseline": 32.0,
+        "docs_per_retrieval_adaptive": 7.8,
+        "docs_per_retrieval_reduction_pct": 75.625,
+        "avg_judge_calls_per_question": 3.64,
+        "k_dist": {
+          "4": 29,
+          "8": 61,
+          "16": 9,
+          "32": 1
+        },
+        "stop_dist": {
+          "clean": 60,
+          "stagnation:novelty_saturated": 34,
+          "stagnation:snapshot_identical": 6
+        }
+      },
+      "imedrag_round_10.json": {
+        "n": 49,
+        "n_retrieval_calls": 98,
+        "acc_baseline": 0.9183673469387755,
+        "acc_adaptive": 0.9183673469387755,
+        "correct_baseline": 45,
+        "correct_adaptive": 45,
+        "ci_baseline": [
+          0.8081061295851387,
+          0.9677977037582878
+        ],
+        "ci_adaptive": [
+          0.8081061295851387,
+          0.9677977037582878
+        ],
+        "only_baseline_correct": 1,
+        "only_adaptive_correct": 1,
+        "mcnemar_p": 1.0,
+        "noninferiority": {
+          "diff_pp": 0.0,
+          "ci_wald_pp": [
+            -5.656750303468072,
+            5.656750303468072
+          ],
+          "ci_tango_pp": [
+            -8.964662628974715,
+            8.964662606611023
+          ],
+          "alpha": 0.05,
+          "tests": [
+            {
+              "margin_pp": 2.0,
+              "p_wald": 0.24416586940573848,
+              "p_tango": 0.26204531409223364,
+              "noninferior_wald": false,
+              "noninferior_tango": false
+            },
+            {
+              "margin_pp": 3.0,
+              "p_wald": 0.1492984548729358,
+              "p_tango": 0.18588649281845582,
+              "noninferior_wald": false,
+              "noninferior_tango": false
+            }
+          ]
+        },
+        "docs_per_question_baseline": 64.0,
+        "docs_per_question_adaptive": 20.571428571428573,
+        "docs_per_question_reduction_pct": 67.85714285714286,
+        "docs_per_retrieval_baseline": 32.0,
+        "docs_per_retrieval_adaptive": 10.285714285714286,
+        "docs_per_retrieval_reduction_pct": 67.85714285714286,
+        "avg_judge_calls_per_question": 4.183673469387755,
+        "k_dist": {
+          "4": 22,
+          "8": 53,
+          "16": 15,
+          "32": 8
+        },
+        "stop_dist": {
+          "clean": 51,
+          "stagnation:novelty_saturated": 42,
+          "max_k": 4,
+          "stagnation:snapshot_identical": 1
+        }
+      },
+      "imedrag_round_11161.json": {
+        "n": 1,
+        "n_retrieval_calls": 2,
+        "acc_baseline": 1.0,
+        "acc_adaptive": 1.0,
+        "correct_baseline": 1,
+        "correct_adaptive": 1,
+        "ci_baseline": [
+          0.20654329147389294,
+          1.0
+        ],
+        "ci_adaptive": [
+          0.20654329147389294,
+          1.0
+        ],
+        "only_baseline_correct": 0,
+        "only_adaptive_correct": 0,
+        "mcnemar_p": 1.0,
+        "noninferiority": {
+          "diff_pp": 0.0,
+          "ci_wald_pp": [
+            0.0,
+            0.0
+          ],
+          "ci_tango_pp": [
+            -79.34506856227628,
+            79.34506856227625
+          ],
+          "alpha": 0.05,
+          "tests": [
+            {
+              "margin_pp": 2.0,
+              "p_wald": 0.0,
+              "p_tango": 0.4432015031835318,
+              "noninferior_wald": true,
+              "noninferior_tango": false
+            },
+            {
+              "margin_pp": 3.0,
+              "p_wald": 0.0,
+              "p_tango": 0.43020074199887626,
+              "noninferior_wald": true,
+              "noninferior_tango": false
+            }
+          ]
+        },
+        "docs_per_question_baseline": 64.0,
+        "docs_per_question_adaptive": 16.0,
+        "docs_per_question_reduction_pct": 75.0,
+        "docs_per_retrieval_baseline": 32.0,
+        "docs_per_retrieval_adaptive": 8.0,
+        "docs_per_retrieval_reduction_pct": 75.0,
+        "avg_judge_calls_per_question": 4.0,
+        "k_dist": {
+          "8": 2
+        },
+        "stop_dist": {
+          "stagnation:novelty_saturated": 1,
+          "clean": 1
+        }
+      },
+      "imedrag_round_12183.json": {
+        "n": 1,
+        "n_retrieval_calls": 2,
+        "acc_baseline": 1.0,
+        "acc_adaptive": 1.0,
+        "correct_baseline": 1,
+        "correct_adaptive": 1,
+        "ci_baseline": [
+          0.20654329147389294,
+          1.0
+        ],
+        "ci_adaptive": [
+          0.20654329147389294,
+          1.0
+        ],
+        "only_baseline_correct": 0,
+        "only_adaptive_correct": 0,
+        "mcnemar_p": 1.0,
+        "noninferiority": {
+          "diff_pp": 0.0,
+          "ci_wald_pp": [
+            0.0,
+            0.0
+          ],
+          "ci_tango_pp": [
+            -79.34506856227628,
+            79.34506856227625
+          ],
+          "alpha": 0.05,
+          "tests": [
+            {
+              "margin_pp": 2.0,
+              "p_wald": 0.0,
+              "p_tango": 0.4432015031835318,
+              "noninferior_wald": true,
+              "noninferior_tango": false
+            },
+            {
+              "margin_pp": 3.0,
+              "p_wald": 0.0,
+              "p_tango": 0.43020074199887626,
+              "noninferior_wald": true,
+              "noninferior_tango": false
+            }
+          ]
+        },
+        "docs_per_question_baseline": 64.0,
+        "docs_per_question_adaptive": 8.0,
+        "docs_per_question_reduction_pct": 87.5,
+        "docs_per_retrieval_baseline": 32.0,
+        "docs_per_retrieval_adaptive": 4.0,
+        "docs_per_retrieval_reduction_pct": 87.5,
+        "avg_judge_calls_per_question": 2.0,
+        "k_dist": {
+          "4": 2
+        },
+        "stop_dist": {
+          "clean": 2
+        }
+      },
+      "imedrag_round_13439.json": {
+        "n": 1,
+        "n_retrieval_calls": 2,
+        "acc_baseline": 1.0,
+        "acc_adaptive": 1.0,
+        "correct_baseline": 1,
+        "correct_adaptive": 1,
+        "ci_baseline": [
+          0.20654329147389294,
+          1.0
+        ],
+        "ci_adaptive": [
+          0.20654329147389294,
+          1.0
+        ],
+        "only_baseline_correct": 0,
+        "only_adaptive_correct": 0,
+        "mcnemar_p": 1.0,
+        "noninferiority": {
+          "diff_pp": 0.0,
+          "ci_wald_pp": [
+            0.0,
+            0.0
+          ],
+          "ci_tango_pp": [
+            -79.34506856227628,
+            79.34506856227625
+          ],
+          "alpha": 0.05,
+          "tests": [
+            {
+              "margin_pp": 2.0,
+              "p_wald": 0.0,
+              "p_tango": 0.4432015031835318,
+              "noninferior_wald": true,
+              "noninferior_tango": false
+            },
+            {
+              "margin_pp": 3.0,
+              "p_wald": 0.0,
+              "p_tango": 0.43020074199887626,
+              "noninferior_wald": true,
+              "noninferior_tango": false
+            }
+          ]
+        },
+        "docs_per_question_baseline": 64.0,
+        "docs_per_question_adaptive": 16.0,
+        "docs_per_question_reduction_pct": 75.0,
+        "docs_per_retrieval_baseline": 32.0,
+        "docs_per_retrieval_adaptive": 8.0,
+        "docs_per_retrieval_reduction_pct": 75.0,
+        "avg_judge_calls_per_question": 4.0,
+        "k_dist": {
+          "8": 2
+        },
+        "stop_dist": {
+          "stagnation:novelty_saturated": 2
+        }
+      },
+      "imedrag_round_14440.json": {
+        "n": 1,
+        "n_retrieval_calls": 2,
+        "acc_baseline": 0.0,
+        "acc_adaptive": 1.0,
+        "correct_baseline": 0,
+        "correct_adaptive": 1,
+        "ci_baseline": [
+          0.0,
+          0.7934567085261071
+        ],
+        "ci_adaptive": [
+          0.20654329147389294,
+          1.0
+        ],
+        "only_baseline_correct": 0,
+        "only_adaptive_correct": 1,
+        "mcnemar_p": 1.0,
+        "noninferiority": {
+          "diff_pp": 100.0,
+          "ci_wald_pp": [
+            100.0,
+            100.0
+          ],
+          "ci_tango_pp": [
+            -58.690137124552486,
+            99.89999999999999
+          ],
+          "alpha": 0.05,
+          "tests": [
+            {
+              "margin_pp": 2.0,
+              "p_wald": 0.0,
+              "p_tango": 0.15381584597314235,
+              "noninferior_wald": true,
+              "noninferior_tango": false
+            },
+            {
+              "margin_pp": 3.0,
+              "p_wald": 0.0,
+              "p_tango": 0.15139616547378543,
+              "noninferior_wald": true,
+              "noninferior_tango": false
+            }
+          ]
+        },
+        "docs_per_question_baseline": 64.0,
+        "docs_per_question_adaptive": 16.0,
+        "docs_per_question_reduction_pct": 75.0,
+        "docs_per_retrieval_baseline": 32.0,
+        "docs_per_retrieval_adaptive": 8.0,
+        "docs_per_retrieval_reduction_pct": 75.0,
+        "avg_judge_calls_per_question": 4.0,
+        "k_dist": {
+          "8": 2
+        },
+        "stop_dist": {
+          "stagnation:novelty_saturated": 2
+        }
+      },
+      "imedrag_round_15459.json": {
+        "n": 1,
+        "n_retrieval_calls": 2,
+        "acc_baseline": 1.0,
+        "acc_adaptive": 0.0,
+        "correct_baseline": 1,
+        "correct_adaptive": 0,
+        "ci_baseline": [
+          0.20654329147389294,
+          1.0
+        ],
+        "ci_adaptive": [
+          0.0,
+          0.7934567085261071
+        ],
+        "only_baseline_correct": 1,
+        "only_adaptive_correct": 0,
+        "mcnemar_p": 1.0,
+        "noninferiority": {
+          "diff_pp": -100.0,
+          "ci_wald_pp": [
+            -100.0,
+            -100.0
+          ],
+          "ci_tango_pp": [
+            -99.89999999999999,
+            58.690137124552486
+          ],
+          "alpha": 0.05,
+          "tests": [
+            {
+              "margin_pp": 2.0,
+              "p_wald": 1.0,
+              "p_tango": 0.8365053252009925,
+              "noninferior_wald": false,
+              "noninferior_tango": false
+            },
+            {
+              "margin_pp": 3.0,
+              "p_wald": 1.0,
+              "p_tango": 0.8340855922317159,
+              "noninferior_wald": false,
+              "noninferior_tango": false
+            }
+          ]
+        },
+        "docs_per_question_baseline": 64.0,
+        "docs_per_question_adaptive": 16.0,
+        "docs_per_question_reduction_pct": 75.0,
+        "docs_per_retrieval_baseline": 32.0,
+        "docs_per_retrieval_adaptive": 8.0,
+        "docs_per_retrieval_reduction_pct": 75.0,
+        "avg_judge_calls_per_question": 4.0,
+        "k_dist": {
+          "8": 2
+        },
+        "stop_dist": {
+          "clean": 1,
+          "stagnation:novelty_saturated": 1
+        }
+      },
+      "imedrag_round_2.json": {
+        "n": 50,
+        "n_retrieval_calls": 100,
+        "acc_baseline": 0.92,
+        "acc_adaptive": 0.88,
+        "correct_baseline": 46,
+        "correct_adaptive": 44,
+        "ci_baseline": [
+          0.8116149745493629,
+          0.9684509967442093
+        ],
+        "ci_adaptive": [
+          0.7619492111337642,
+          0.9438247628937535
+        ],
+        "only_baseline_correct": 2,
+        "only_adaptive_correct": 0,
+        "mcnemar_p": 0.5,
+        "noninferiority": {
+          "diff_pp": -4.0,
+          "ci_wald_pp": [
+            -9.431611523565623,
+            1.4316115235656235
+          ],
+          "ci_tango_pp": [
+            -13.46009068750702,
+            3.4201501894368604
+          ],
+          "alpha": 0.05,
+          "tests": [
+            {
+              "margin_pp": 2.0,
+              "p_wald": 0.7647567889706051,
+              "p_tango": 0.8389489961055292,
+              "noninferior_wald": false,
+              "noninferior_tango": false
+            },
+            {
+              "margin_pp": 3.0,
+              "p_wald": 0.640891935233007,
+              "p_tango": 0.6607508988534949,
+              "noninferior_wald": false,
+              "noninferior_tango": false
+            }
+          ]
+        },
+        "docs_per_question_baseline": 64.0,
+        "docs_per_question_adaptive": 16.64,
+        "docs_per_question_reduction_pct": 74.0,
+        "docs_per_retrieval_baseline": 32.0,
+        "docs_per_retrieval_adaptive": 8.32,
+        "docs_per_retrieval_reduction_pct": 74.0,
+        "avg_judge_calls_per_question": 3.7,
+        "k_dist": {
+          "4": 32,
+          "8": 54,
+          "16": 11,
+          "32": 3
+        },
+        "stop_dist": {
+          "clean": 64,
+          "stagnation:novelty_saturated": 31,
+          "stagnation:snapshot_identical": 3,
+          "max_k": 2
+        }
+      },
+      "imedrag_round_3.json": {
+        "n": 50,
+        "n_retrieval_calls": 98,
+        "acc_baseline": 0.84,
+        "acc_adaptive": 0.8,
+        "correct_baseline": 42,
+        "correct_adaptive": 40,
+        "ci_baseline": [
+          0.7148551903823401,
+          0.9166267863791231
+        ],
+        "ci_adaptive": [
+          0.6696262789551477,
+          0.8875637005402612
+        ],
+        "only_baseline_correct": 2,
+        "only_adaptive_correct": 0,
+        "mcnemar_p": 0.5,
+        "noninferiority": {
+          "diff_pp": -4.0,
+          "ci_wald_pp": [
+            -9.431611523565623,
+            1.4316115235656235
+          ],
+          "ci_tango_pp": [
+            -13.46009068750702,
+            3.4201501894368604
+          ],
+          "alpha": 0.05,
+          "tests": [
+            {
+              "margin_pp": 2.0,
+              "p_wald": 0.7647567889706051,
+              "p_tango": 0.8389489961055292,
+              "noninferior_wald": false,
+              "noninferior_tango": false
+            },
+            {
+              "margin_pp": 3.0,
+              "p_wald": 0.640891935233007,
+              "p_tango": 0.6607508988534949,
+              "noninferior_wald": false,
+              "noninferior_tango": false
+            }
+          ]
+        },
+        "docs_per_question_baseline": 62.72,
+        "docs_per_question_adaptive": 18.08,
+        "docs_per_question_reduction_pct": 71.1734693877551,
+        "docs_per_retrieval_baseline": 32.0,
+        "docs_per_retrieval_adaptive": 9.224489795918368,
+        "docs_per_retrieval_reduction_pct": 71.1734693877551,
+        "avg_judge_calls_per_question": 3.82,
+        "k_dist": {
+          "4": 26,
+          "8": 58,
+          "16": 7,
+          "32": 7
+        },
+        "stop_dist": {
+          "clean": 59,
+          "stagnation:novelty_saturated": 31,
+          "stagnation:snapshot_identical": 5,
+          "max_k": 3
+        }
+      },
+      "imedrag_round_4.json": {
+        "n": 48,
+        "n_retrieval_calls": 96,
+        "acc_baseline": 0.8958333333333334,
+        "acc_adaptive": 0.9375,
+        "correct_baseline": 43,
+        "correct_adaptive": 45,
+        "ci_baseline": [
+          0.7783231187385907,
+          0.9546789490988218
+        ],
+        "ci_adaptive": [
+          0.8316430233725778,
+          0.9785171568687727
+        ],
+        "only_baseline_correct": 1,
+        "only_adaptive_correct": 3,
+        "mcnemar_p": 0.625,
+        "noninferiority": {
+          "diff_pp": 4.166666666666666,
+          "ci_wald_pp": [
+            -3.914334316216144,
+            12.247667649549477
+          ],
+          "ci_tango_pp": [
+            -5.654044023292419,
+            15.173891276239965
+          ],
+          "alpha": 0.05,
+          "tests": [
+            {
+              "margin_pp": 2.0,
+              "p_wald": 0.06737090330195783,
+              "p_tango": 0.08253465440886965,
+              "noninferior_wald": false,
+              "noninferior_tango": false
+            },
+            {
+              "margin_pp": 3.0,
+              "p_wald": 0.04108765171988993,
+              "p_tango": 0.05951800675852437,
+              "noninferior_wald": false,
+              "noninferior_tango": false
+            }
+          ]
+        },
+        "docs_per_question_baseline": 64.0,
+        "docs_per_question_adaptive": 18.583333333333332,
+        "docs_per_question_reduction_pct": 70.96354166666667,
+        "docs_per_retrieval_baseline": 32.0,
+        "docs_per_retrieval_adaptive": 9.291666666666666,
+        "docs_per_retrieval_reduction_pct": 70.96354166666667,
+        "avg_judge_calls_per_question": 3.9791666666666665,
+        "k_dist": {
+          "4": 23,
+          "8": 56,
+          "16": 12,
+          "32": 5
+        },
+        "stop_dist": {
+          "clean": 60,
+          "stagnation:novelty_saturated": 31,
+          "stagnation:snapshot_identical": 3,
+          "max_k": 2
+        }
+      },
+      "imedrag_round_5.json": {
+        "n": 50,
+        "n_retrieval_calls": 100,
+        "acc_baseline": 0.92,
+        "acc_adaptive": 0.86,
+        "correct_baseline": 46,
+        "correct_adaptive": 43,
+        "ci_baseline": [
+          0.8116149745493629,
+          0.9684509967442093
+        ],
+        "ci_adaptive": [
+          0.738135428014719,
+          0.9304925473797714
+        ],
+        "only_baseline_correct": 5,
+        "only_adaptive_correct": 2,
+        "mcnemar_p": 0.453125,
+        "noninferiority": {
+          "diff_pp": -6.0,
+          "ci_wald_pp": [
+            -16.23694273836362,
+            4.236942738363622
+          ],
+          "ci_tango_pp": [
+            -18.242026650692416,
+            5.33268221599764
+          ],
+          "alpha": 0.05,
+          "tests": [
+            {
+              "margin_pp": 2.0,
+              "p_wald": 0.7781141201725876,
+              "p_tango": 0.7797551801724962,
+              "noninferior_wald": false,
+              "noninferior_tango": false
+            },
+            {
+              "margin_pp": 3.0,
+              "p_wald": 0.7171445517807407,
+              "p_tango": 0.7194218532169449,
+              "noninferior_wald": false,
+              "noninferior_tango": false
+            }
+          ]
+        },
+        "docs_per_question_baseline": 64.0,
+        "docs_per_question_adaptive": 18.4,
+        "docs_per_question_reduction_pct": 71.25,
+        "docs_per_retrieval_baseline": 32.0,
+        "docs_per_retrieval_adaptive": 9.2,
+        "docs_per_retrieval_reduction_pct": 71.25,
+        "avg_judge_calls_per_question": 3.96,
+        "k_dist": {
+          "4": 24,
+          "8": 59,
+          "16": 12,
+          "32": 5
+        },
+        "stop_dist": {
+          "clean": 59,
+          "stagnation:novelty_saturated": 35,
+          "stagnation:snapshot_identical": 3,
+          "max_k": 3
+        }
+      },
+      "imedrag_round_6.json": {
+        "n": 50,
+        "n_retrieval_calls": 99,
+        "acc_baseline": 0.84,
+        "acc_adaptive": 0.88,
+        "correct_baseline": 42,
+        "correct_adaptive": 44,
+        "ci_baseline": [
+          0.7148551903823401,
+          0.9166267863791231
+        ],
+        "ci_adaptive": [
+          0.7619492111337642,
+          0.9438247628937535
+        ],
+        "only_baseline_correct": 1,
+        "only_adaptive_correct": 3,
+        "mcnemar_p": 0.625,
+        "noninferiority": {
+          "diff_pp": 4.0,
+          "ci_wald_pp": [
+            -3.7610614163581935,
+            11.761061416358192
+          ],
+          "ci_tango_pp": [
+            -5.442500635885154,
+            14.614626491675203
+          ],
+          "alpha": 0.05,
+          "tests": [
+            {
+              "margin_pp": 2.0,
+              "p_wald": 0.06485723389395648,
+              "p_tango": 0.08038150103907382,
+              "noninferior_wald": false,
+              "noninferior_tango": false
+            },
+            {
+              "margin_pp": 3.0,
+              "p_wald": 0.03854993587177091,
+              "p_tango": 0.057232923959864124,
+              "noninferior_wald": false,
+              "noninferior_tango": false
+            }
+          ]
+        },
+        "docs_per_question_baseline": 63.36,
+        "docs_per_question_adaptive": 18.96,
+        "docs_per_question_reduction_pct": 70.07575757575756,
+        "docs_per_retrieval_baseline": 32.0,
+        "docs_per_retrieval_adaptive": 9.575757575757576,
+        "docs_per_retrieval_reduction_pct": 70.07575757575756,
+        "avg_judge_calls_per_question": 3.94,
+        "k_dist": {
+          "4": 27,
+          "8": 53,
+          "16": 12,
+          "32": 7
+        },
+        "stop_dist": {
+          "clean": 64,
+          "stagnation:novelty_saturated": 32,
+          "stagnation:snapshot_identical": 2,
+          "max_k": 1
+        }
+      },
+      "imedrag_round_7.json": {
+        "n": 50,
+        "n_retrieval_calls": 100,
+        "acc_baseline": 0.72,
+        "acc_adaptive": 0.76,
+        "correct_baseline": 36,
+        "correct_adaptive": 38,
+        "ci_baseline": [
+          0.5833461285401034,
+          0.8252598564231963
+        ],
+        "ci_adaptive": [
+          0.6258705062480763,
+          0.8570274759812779
+        ],
+        "only_baseline_correct": 2,
+        "only_adaptive_correct": 4,
+        "mcnemar_p": 0.6875,
+        "noninferiority": {
+          "diff_pp": 4.0,
+          "ci_wald_pp": [
+            -5.5375963887153885,
+            13.53759638871539
+          ],
+          "ci_tango_pp": [
+            -6.950819262480404,
+            15.683565270609867
+          ],
+          "alpha": 0.05,
+          "tests": [
+            {
+              "margin_pp": 2.0,
+              "p_wald": 0.10878929894061073,
+              "p_tango": 0.11764485499797739,
+              "noninferior_wald": false,
+              "noninferior_tango": false
+            },
+            {
+              "margin_pp": 3.0,
+              "p_wald": 0.07514737493755186,
+              "p_tango": 0.08718934593547556,
+              "noninferior_wald": false,
+              "noninferior_tango": false
+            }
+          ]
+        },
+        "docs_per_question_baseline": 64.0,
+        "docs_per_question_adaptive": 17.84,
+        "docs_per_question_reduction_pct": 72.125,
+        "docs_per_retrieval_baseline": 32.0,
+        "docs_per_retrieval_adaptive": 8.92,
+        "docs_per_retrieval_reduction_pct": 72.125,
+        "avg_judge_calls_per_question": 3.82,
+        "k_dist": {
+          "4": 29,
+          "8": 57,
+          "16": 8,
+          "32": 6
+        },
+        "stop_dist": {
+          "clean": 65,
+          "stagnation:novelty_saturated": 26,
+          "max_k": 5,
+          "stagnation:snapshot_identical": 4
+        }
+      },
+      "imedrag_round_8.json": {
+        "n": 50,
+        "n_retrieval_calls": 100,
+        "acc_baseline": 0.86,
+        "acc_adaptive": 0.88,
+        "correct_baseline": 43,
+        "correct_adaptive": 44,
+        "ci_baseline": [
+          0.738135428014719,
+          0.9304925473797714
+        ],
+        "ci_adaptive": [
+          0.7619492111337642,
+          0.9438247628937535
+        ],
+        "only_baseline_correct": 1,
+        "only_adaptive_correct": 2,
+        "mcnemar_p": 1.0,
+        "noninferiority": {
+          "diff_pp": 2.0,
+          "ci_wald_pp": [
+            -4.766844843992947,
+            8.766844843992947
+          ],
+          "ci_tango_pp": [
+            -7.114200168818491,
+            11.822848841650895
+          ],
+          "alpha": 0.05,
+          "tests": [
+            {
+              "margin_pp": 2.0,
+              "p_wald": 0.12331597739827393,
+              "p_tango": 0.14285569155773525,
+              "noninferior_wald": false,
+              "noninferior_tango": false
+            },
+            {
+              "margin_pp": 3.0,
+              "p_wald": 0.0737790083680474,
+              "p_tango": 0.10138449771721614,
+              "noninferior_wald": false,
+              "noninferior_tango": false
+            }
+          ]
+        },
+        "docs_per_question_baseline": 64.0,
+        "docs_per_question_adaptive": 17.36,
+        "docs_per_question_reduction_pct": 72.875,
+        "docs_per_retrieval_baseline": 32.0,
+        "docs_per_retrieval_adaptive": 8.68,
+        "docs_per_retrieval_reduction_pct": 72.875,
+        "avg_judge_calls_per_question": 3.86,
+        "k_dist": {
+          "4": 23,
+          "8": 65,
+          "16": 8,
+          "32": 4
+        },
+        "stop_dist": {
+          "clean": 50,
+          "stagnation:novelty_saturated": 43,
+          "stagnation:snapshot_identical": 5,
+          "max_k": 2
+        }
+      },
+      "imedrag_round_9.json": {
+        "n": 48,
+        "n_retrieval_calls": 96,
+        "acc_baseline": 0.875,
+        "acc_adaptive": 0.875,
+        "correct_baseline": 42,
+        "correct_adaptive": 42,
+        "ci_baseline": [
+          0.7529927291394518,
+          0.9414302824959915
+        ],
+        "ci_adaptive": [
+          0.7529927291394518,
+          0.9414302824959915
+        ],
+        "only_baseline_correct": 1,
+        "only_adaptive_correct": 1,
+        "mcnemar_p": 1.0,
+        "noninferiority": {
+          "diff_pp": 0.0,
+          "ci_wald_pp": [
+            -5.774599268123657,
+            5.774599268123657
+          ],
+          "ci_tango_pp": [
+            -9.137587206946582,
+            9.137587212649134
+          ],
+          "alpha": 0.05,
+          "tests": [
+            {
+              "margin_pp": 2.0,
+              "p_wald": 0.24862516465261764,
+              "p_tango": 0.2657156316503583,
+              "noninferior_wald": false,
+              "noninferior_tango": false
+            },
+            {
+              "margin_pp": 3.0,
+              "p_wald": 0.15428343843062453,
+              "p_tango": 0.1897614346823402,
+              "noninferior_wald": false,
+              "noninferior_tango": false
+            }
+          ]
+        },
+        "docs_per_question_baseline": 64.0,
+        "docs_per_question_adaptive": 17.25,
+        "docs_per_question_reduction_pct": 73.046875,
+        "docs_per_retrieval_baseline": 32.0,
+        "docs_per_retrieval_adaptive": 8.625,
+        "docs_per_retrieval_reduction_pct": 73.046875,
+        "avg_judge_calls_per_question": 3.7708333333333335,
+        "k_dist": {
+          "4": 27,
+          "8": 58,
+          "16": 6,
+          "32": 5
+        },
+        "stop_dist": {
+          "clean": 59,
+          "stagnation:novelty_saturated": 37
+        }
+      }
+    },
+    "pooled": {
+      "n": 500,
+      "n_retrieval_calls": 997,
+      "acc_baseline": 0.86,
+      "acc_adaptive": 0.868,
+      "correct_baseline": 430,
+      "correct_adaptive": 434,
+      "ci_baseline": [
+        0.82683247567339,
+        0.8876777989843596
+      ],
+      "ci_adaptive": [
+        0.8355045607103054,
+        0.8948837200509497
+      ],
+      "only_baseline_correct": 17,
+      "only_adaptive_correct": 21,
+      "mcnemar_p": 0.6271025701571489,
+      "noninferiority": {
+        "diff_pp": 0.8,
+        "ci_wald_pp": [
+          -1.6153882379784368,
+          3.2153882379784364
+        ],
+        "ci_tango_pp": [
+          -1.6870065862611534,
+          3.34225611338929
+        ],
+        "alpha": 0.05,
+        "tests": [
+          {
+            "margin_pp": 2.0,
+            "p_wald": 0.011541541370986508,
+            "p_tango": 0.014331999694888298,
+            "noninferior_wald": true,
+            "noninferior_tango": true
+          },
+          {
+            "margin_pp": 3.0,
+            "p_wald": 0.0010228863233281427,
+            "p_tango": 0.0019881901805489655,
+            "noninferior_wald": true,
+            "noninferior_tango": true
+          }
+        ]
+      },
+      "docs_per_question_baseline": 63.808,
+      "docs_per_question_adaptive": 17.888,
+      "docs_per_question_reduction_pct": 71.96589769307924,
+      "docs_per_retrieval_baseline": 32.0,
+      "docs_per_retrieval_adaptive": 8.970912738214643,
+      "docs_per_retrieval_reduction_pct": 71.96589769307924,
+      "avg_judge_calls_per_question": 3.864,
+      "k_dist": {
+        "4": 264,
+        "8": 582,
+        "16": 100,
+        "32": 51
+      },
+      "stop_dist": {
+        "clean": 595,
+        "stagnation:novelty_saturated": 348,
+        "stagnation:snapshot_identical": 32,
+        "max_k": 22
+      }
+    },
+    "excluded_due_to_errors": {
+      "imedrag_round_1.json": 0,
+      "imedrag_round_10.json": 1,
+      "imedrag_round_11161.json": 0,
+      "imedrag_round_12183.json": 0,
+      "imedrag_round_13439.json": 0,
+      "imedrag_round_14440.json": 0,
+      "imedrag_round_15459.json": 0,
+      "imedrag_round_2.json": 0,
+      "imedrag_round_3.json": 0,
+      "imedrag_round_4.json": 2,
+      "imedrag_round_5.json": 0,
+      "imedrag_round_6.json": 0,
+      "imedrag_round_7.json": 0,
+      "imedrag_round_8.json": 0,
+      "imedrag_round_9.json": 2
+    },
+    "mean_std_across_files": {
+      "acc_baseline": [
+        0.8406133786848072,
+        0.24589169489782764
+      ],
+      "acc_adaptive": [
+        0.8460578231292517,
+        0.24511254452222597
+      ],
+      "docs_per_question_adaptive": [
+        16.75231746031746,
+        2.794090024093033
+      ],
+      "docs_per_question_reduction_pct": [
+        73.7661190991548,
+        4.405078604152944
+      ],
+      "docs_per_retrieval_adaptive": [
+        8.39484188827046,
+        1.4096251533289421
+      ],
+      "docs_per_retrieval_reduction_pct": [
+        73.7661190991548,
+        4.405078604152944
+      ]
+    }
+  }
+}

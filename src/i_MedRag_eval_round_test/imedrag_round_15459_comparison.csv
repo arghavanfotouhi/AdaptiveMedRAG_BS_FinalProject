@@ -1,0 +1,2 @@
+﻿dataset_idx,gold,baseline_pred,baseline_correct,adaptive_pred,adaptive_correct,outcome,baseline_sec,adaptive_sec,adaptive_selected_k,adaptive_stop_reasons,adaptive_subquestion_details
+400,A,A,YES,D,NO,Baseline only correct,37.648,64.691,8,clean | stagnation:novelty_saturated,"subq1: k=8, stop=clean | subq2: k=8, stop=stagnation:novelty_saturated"

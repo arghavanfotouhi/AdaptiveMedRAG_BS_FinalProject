@@ -17,9 +17,17 @@ from template import *
 
 from config import config
 
+# Adaptive retrieval logic (judge + driver). Change the module name below to
+# whatever file holds your adaptive_retrieve() code.
+from adaptive_retrieval import adaptive_retrieve
+
 openai.api_type = openai.api_type or os.getenv("OPENAI_API_TYPE") or config.get("api_type")
 openai.api_version = openai.api_version or os.getenv("OPENAI_API_VERSION") or config.get("api_version")
 openai.api_key = openai.api_key or os.getenv('OPENAI_API_KEY') or config["api_key"]
+
+API_KEY = os.getenv("API_KEY") or config.get("api_key")
+API_BASE = os.getenv("API_BASE") or config.get("api_base") or "https://api.ai.arvancloud.ir/v1"
+# -----------------------------------------------------------------------------
 
 if openai.__version__.startswith("0"):
     openai.api_base = openai.api_base or os.getenv("OPENAI_API_BASE") or config.get("api_base")
@@ -27,6 +35,7 @@ if openai.__version__.startswith("0"):
         openai_client = lambda **x: openai.ChatCompletion.create(**{'engine' if k == 'model' else k: v for k, v in x.items()})["choices"][0]["message"]["content"]
     else:
         openai_client = lambda **x: openai.ChatCompletion.create(**x)["choices"][0]["message"]["content"]
+    arvancloud_client = None
 else:
     if openai.api_type == "azure":
         openai.azure_endpoint = openai.azure_endpoint or os.getenv("OPENAI_ENDPOINT") or config.get("azure_endpoint")
@@ -40,9 +49,14 @@ else:
             api_key=openai.api_key,
         ).chat.completions.create(**x).choices[0].message.content
 
+    arvancloud_client = lambda **x: openai.OpenAI(
+        api_key=API_KEY,
+        base_url=API_BASE,
+    ).chat.completions.create(**x).choices[0].message.content
+
 class MedRAG:
 
-    def __init__(self, llm_name="OpenAI/gpt-3.5-turbo-16k", rag=True, follow_up=False, retriever_name="MedCPT", corpus_name="Textbooks", db_dir="./corpus", cache_dir=None, corpus_cache=False, HNSW=False):
+    def __init__(self, llm_name="OpenAI/gpt-3.5-turbo-16k", rag=True, follow_up=False, retriever_name="MedCPT", corpus_name="Textbooks", db_dir="./corpus", cache_dir=None, corpus_cache=False, HNSW=False, adaptive=False, adaptive_k_schedule=None):
         self.llm_name = llm_name
         self.rag = rag
         self.retriever_name = retriever_name
@@ -64,6 +78,22 @@ class MedRAG:
             elif "gpt-4" in self.model:
                 self.max_length = 32768
                 self.context_length = 30000
+            self.tokenizer = tiktoken.get_encoding("cl100k_base")
+        elif self.llm_name.split('/')[0].lower() == "arvancloud":
+            # e.g. llm_name="ArvanCloud/gpt-4o" -> model sent to ArvanCloud is "gpt-4o"
+            # Use whatever model identifier ArvanCloud's panel/docs list for your deployment.
+            self.model = self.llm_name.split('/')[-1]
+            if "gpt-3.5" in self.model or "gpt-35" in self.model:
+                self.max_length = 16384
+                self.context_length = 15000
+            elif "gpt-4" in self.model:
+                self.max_length = 32768
+                self.context_length = 30000
+            else:
+                # generic/unknown model on ArvanCloud - conservative default,
+                # override manually if you know the model's real context window.
+                self.max_length = 8192
+                self.context_length = 7000
             self.tokenizer = tiktoken.get_encoding("cl100k_base")
         elif "gemini" in self.llm_name.lower():
             import google.generativeai as genai
@@ -118,6 +148,24 @@ class MedRAG:
                 model_kwargs={"cache_dir":self.cache_dir},
             )
         
+        # --- adaptive retrieval for i-MedRAG ---------------------------------
+        # When enabled, every follow-up query of i-MedRAG retrieves its
+        # documents with adaptive_retrieve() (judge + clean/plateau/stagnation
+        # stopping) instead of a fixed top-k.
+        self.adaptive = adaptive
+        self.adaptive_k_schedule = adaptive_k_schedule
+        self.last_adaptive_log = []
+        if self.adaptive:
+            if not self.rag:
+                raise ValueError("adaptive=True requires rag=True.")
+            rs = self.retrieval_system
+            if len(rs.retrievers) != 1 or len(rs.retrievers[0]) != 1:
+                raise ValueError(
+                    "adaptive retrieval needs embeddings (novelty), which "
+                    "retrieve_with_embeddings() only supports for exactly one "
+                    "dense retriever and one corpus (e.g. MedCPT + Textbooks)."
+                )
+
         self.follow_up = follow_up
         if self.rag and self.follow_up:
             self.answer = self.i_medrag_answer
@@ -139,6 +187,21 @@ class MedRAG:
         '''
         if "openai" in self.llm_name.lower():
             ans = openai_client(
+                model=self.model,
+                messages=messages,
+                temperature=0.0,
+                **kwargs
+            )
+        elif "arvancloud" in self.llm_name.lower():
+            if arvancloud_client is None:
+                raise RuntimeError(
+                    "ArvanCloud support requires openai>=1.0 installed (pip install -U openai)."
+                )
+            if not API_KEY:
+                raise RuntimeError(
+                    "Set API_KEY (env var) or config['api_key'] with your ArvanCloud API key."
+                )
+            ans = arvancloud_client(
                 model=self.model,
                 messages=messages,
                 temperature=0.0,
@@ -214,6 +277,8 @@ class MedRAG:
                 contexts = [""]
             if "openai" in self.llm_name.lower():
                 contexts = [self.tokenizer.decode(self.tokenizer.encode("\n".join(contexts))[:self.context_length])]
+            elif "arvancloud" in self.llm_name.lower():
+                contexts = [self.tokenizer.decode(self.tokenizer.encode("\n".join(contexts))[:self.context_length])]
             elif "gemini" in self.llm_name.lower():
                 contexts = [self.tokenizer.decode(self.tokenizer.encode("\n".join(contexts))[:self.context_length])]
             else:
@@ -254,7 +319,68 @@ class MedRAG:
         
         return answers[0] if len(answers)==1 else answers, retrieved_snippets, scores
 
-    def i_medrag_answer(self, question, options=None, k=32, rrf_k=100, save_path = None, n_rounds=4, n_queries=3, qa_cache_path=None, **kwargs):
+    @staticmethod
+    def _default_k_schedule(k):
+        base = tuple(x for x in (4, 8, 16, 32) if x < k)
+        return base + (k,)
+
+    def _adaptive_medrag_answer(self, query, k=32, rrf_k=100, k_schedule=None, **kwargs):
+        """Adaptive counterpart of medrag_answer() for ONE i-MedRAG follow-up
+        query.
+
+        1. Retrieve top-max_k once (with embeddings, needed for novelty).
+        2. adaptive_retrieve() evaluates k_schedule incrementally with the
+           evidence judge and picks the smallest sufficient k (clean STOP /
+           plateau STOP / stagnation STOP, or max_k).
+        3. The selected snippets are passed to medrag_answer(snippets=...)
+           so the answer prompt/format is identical to the non-adaptive path.
+
+        The judge sees the follow-up query only (options=None): a follow-up
+        query is a free-form sub-question, not a multiple-choice problem, so
+        the option-discrimination part is skipped (option_ok=True).
+
+        Returns (answer, snippets, scores, log_entry).
+        """
+        schedule = tuple(k_schedule) if k_schedule else self._default_k_schedule(k)
+        max_k = max(schedule)
+
+        retrieved = self.retrieval_system.retrieve_with_embeddings(
+            query, k=max_k, rrf_k=rrf_k
+        )
+        snippets, scores, selected_k, history = adaptive_retrieve(
+            self,
+            query,
+            options=None,
+            rrf_k=rrf_k,
+            k_schedule=schedule,
+            verbose=False,
+            retrieved=retrieved,
+        )
+
+        answer, snippets, _ = self.medrag_answer(
+            query, k=max(selected_k, 1), rrf_k=rrf_k, snippets=snippets, **kwargs
+        )
+
+        last = history[-1] if history else {}
+        log_entry = {
+            "query": query,
+            "selected_k": selected_k,
+            "max_k": max_k,
+            "judge_calls": len(history),
+            "stop_reason": last.get("stop_reason")
+                or ("stagnation:" + str(last.get("stagnation_reason"))
+                    if last.get("stagnated") else "max_k"),
+            "history": history,
+        }
+        return answer, snippets, scores, log_entry
+
+    def i_medrag_answer(self, question, options=None, k=32, rrf_k=100, save_path = None, n_rounds=4, n_queries=3, qa_cache_path=None, adaptive=None, adaptive_k_schedule=None, **kwargs):
+        use_adaptive = self.adaptive if adaptive is None else adaptive
+        if use_adaptive and not (self.rag and len(self.retrieval_system.retrievers) == 1 and len(self.retrieval_system.retrievers[0]) == 1):
+            raise ValueError("adaptive retrieval needs rag=True and a single dense retriever/corpus.")
+        k_schedule = adaptive_k_schedule or self.adaptive_k_schedule
+        self.last_adaptive_log = []
+
         if options is not None:
             options = '\n'.join([key+". "+options[key] for key in sorted(options.keys())])
         else:
@@ -375,7 +501,16 @@ class MedRAG:
                     if question.strip() == "":
                         continue
                     try:
-                        rag_result = self.medrag_answer(question, k=k, rrf_k=rrf_k, **kwargs)[0]
+                        if use_adaptive:
+                            rag_result, _, _, log_entry = self._adaptive_medrag_answer(
+                                question, k=k, rrf_k=rrf_k, k_schedule=k_schedule, **kwargs
+                            )
+                            self.last_adaptive_log.append(log_entry)
+                            if save_path:
+                                with open(save_path + ".adaptive.json", 'w') as f:
+                                    json.dump(self.last_adaptive_log, f, indent=4, default=str)
+                        else:
+                            rag_result = self.medrag_answer(question, k=k, rrf_k=rrf_k, **kwargs)[0]
                         context += f"\n\nQuery: {question}\nAnswer: {rag_result}"
                         context = context.strip()
                     except Exception as E:

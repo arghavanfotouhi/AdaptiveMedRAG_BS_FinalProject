@@ -1,0 +1,418 @@
+Baseline config: baseline_k32 (k = 32)
+Adaptive config(s): adaptive_4_8_16_32
+
+
+######## Adaptive config: adaptive_4_8_16_32 ########
+
+==========================================================================
+File: imedrag_round_1.json  (N = 50 questions, 100 retrieval calls, excluded due to errors = 0)
+==========================================================================
+1) Answer accuracy
+   Fixed-k (baseline): 82.00%  (41/50)  95% CI=[69.20, 90.23]
+   Adaptive-k        : 90.00%  (45/50)  95% CI=[78.64, 95.65]
+   Only baseline correct: 0 | Only adaptive correct: 4 | McNemar p = 0.1250
+2) Average number of documents used
+   Per question  : Fixed-k = 64.00 | Adaptive-k = 15.60 | reduction = 75.62%
+   Per retrieval : Fixed-k = 32.00 | Adaptive-k = 7.80 | reduction = 75.62%
+3) Distribution of selected k (Adaptive-k, over retrieval calls)
+   k=4   :   29  (29.0%)
+   k=8   :   61  (61.0%)
+   k=16  :    9  (9.0%)
+   k=32  :    1  (1.0%)
+4) Distribution of stop reasons (Adaptive-k, over retrieval calls)
+   clean                           :   60  (60.0%)
+   stagnation:novelty_saturated    :   34  (34.0%)
+   stagnation:snapshot_identical   :    6  (6.0%)
+5) Non-inferiority of Adaptive-k vs Fixed-k (one-sided alpha = 0.025)
+   Accuracy difference (Adaptive - Fixed): +8.00 pp
+   95% CI (Wald)  : [+0.48, +15.52] pp
+   95% CI (Tango) : [+0.29, +18.84] pp
+   margin = 2.0 pp : p(Tango) = 0.0119, p(Wald) = 0.0046  ->  NON-INFERIOR
+   margin = 3.0 pp : p(Tango) = 0.0086, p(Wald) = 0.0021  ->  NON-INFERIOR
+
+==========================================================================
+File: imedrag_round_10.json  (N = 49 questions, 98 retrieval calls, excluded due to errors = 1)
+==========================================================================
+1) Answer accuracy
+   Fixed-k (baseline): 91.84%  (45/49)  95% CI=[80.81, 96.78]
+   Adaptive-k        : 91.84%  (45/49)  95% CI=[80.81, 96.78]
+   Only baseline correct: 1 | Only adaptive correct: 1 | McNemar p = 1.0000
+2) Average number of documents used
+   Per question  : Fixed-k = 64.00 | Adaptive-k = 20.57 | reduction = 67.86%
+   Per retrieval : Fixed-k = 32.00 | Adaptive-k = 10.29 | reduction = 67.86%
+3) Distribution of selected k (Adaptive-k, over retrieval calls)
+   k=4   :   22  (22.4%)
+   k=8   :   53  (54.1%)
+   k=16  :   15  (15.3%)
+   k=32  :    8  (8.2%)
+4) Distribution of stop reasons (Adaptive-k, over retrieval calls)
+   clean                           :   51  (52.0%)
+   stagnation:novelty_saturated    :   42  (42.9%)
+   max_k                           :    4  (4.1%)
+   stagnation:snapshot_identical   :    1  (1.0%)
+5) Non-inferiority of Adaptive-k vs Fixed-k (one-sided alpha = 0.025)
+   Accuracy difference (Adaptive - Fixed): +0.00 pp
+   95% CI (Wald)  : [-5.66, +5.66] pp
+   95% CI (Tango) : [-8.96, +8.96] pp
+   margin = 2.0 pp : p(Tango) = 0.2620, p(Wald) = 0.2442  ->  not shown
+   margin = 3.0 pp : p(Tango) = 0.1859, p(Wald) = 0.1493  ->  not shown
+
+==========================================================================
+File: imedrag_round_11161.json  (N = 1 questions, 2 retrieval calls, excluded due to errors = 0)
+==========================================================================
+1) Answer accuracy
+   Fixed-k (baseline): 100.00%  (1/1)  95% CI=[20.65, 100.00]
+   Adaptive-k        : 100.00%  (1/1)  95% CI=[20.65, 100.00]
+   Only baseline correct: 0 | Only adaptive correct: 0 | McNemar p = 1.0000
+2) Average number of documents used
+   Per question  : Fixed-k = 64.00 | Adaptive-k = 16.00 | reduction = 75.00%
+   Per retrieval : Fixed-k = 32.00 | Adaptive-k = 8.00 | reduction = 75.00%
+3) Distribution of selected k (Adaptive-k, over retrieval calls)
+   k=8   :    2  (100.0%)
+4) Distribution of stop reasons (Adaptive-k, over retrieval calls)
+   stagnation:novelty_saturated    :    1  (50.0%)
+   clean                           :    1  (50.0%)
+5) Non-inferiority of Adaptive-k vs Fixed-k (one-sided alpha = 0.025)
+   Accuracy difference (Adaptive - Fixed): +0.00 pp
+   95% CI (Wald)  : [+0.00, +0.00] pp
+   95% CI (Tango) : [-79.35, +79.35] pp
+   margin = 2.0 pp : p(Tango) = 0.4432, p(Wald) = 0.0000  ->  not shown
+   margin = 3.0 pp : p(Tango) = 0.4302, p(Wald) = 0.0000  ->  not shown
+
+==========================================================================
+File: imedrag_round_12183.json  (N = 1 questions, 2 retrieval calls, excluded due to errors = 0)
+==========================================================================
+1) Answer accuracy
+   Fixed-k (baseline): 100.00%  (1/1)  95% CI=[20.65, 100.00]
+   Adaptive-k        : 100.00%  (1/1)  95% CI=[20.65, 100.00]
+   Only baseline correct: 0 | Only adaptive correct: 0 | McNemar p = 1.0000
+2) Average number of documents used
+   Per question  : Fixed-k = 64.00 | Adaptive-k = 8.00 | reduction = 87.50%
+   Per retrieval : Fixed-k = 32.00 | Adaptive-k = 4.00 | reduction = 87.50%
+3) Distribution of selected k (Adaptive-k, over retrieval calls)
+   k=4   :    2  (100.0%)
+4) Distribution of stop reasons (Adaptive-k, over retrieval calls)
+   clean                           :    2  (100.0%)
+5) Non-inferiority of Adaptive-k vs Fixed-k (one-sided alpha = 0.025)
+   Accuracy difference (Adaptive - Fixed): +0.00 pp
+   95% CI (Wald)  : [+0.00, +0.00] pp
+   95% CI (Tango) : [-79.35, +79.35] pp
+   margin = 2.0 pp : p(Tango) = 0.4432, p(Wald) = 0.0000  ->  not shown
+   margin = 3.0 pp : p(Tango) = 0.4302, p(Wald) = 0.0000  ->  not shown
+
+==========================================================================
+File: imedrag_round_13439.json  (N = 1 questions, 2 retrieval calls, excluded due to errors = 0)
+==========================================================================
+1) Answer accuracy
+   Fixed-k (baseline): 100.00%  (1/1)  95% CI=[20.65, 100.00]
+   Adaptive-k        : 100.00%  (1/1)  95% CI=[20.65, 100.00]
+   Only baseline correct: 0 | Only adaptive correct: 0 | McNemar p = 1.0000
+2) Average number of documents used
+   Per question  : Fixed-k = 64.00 | Adaptive-k = 16.00 | reduction = 75.00%
+   Per retrieval : Fixed-k = 32.00 | Adaptive-k = 8.00 | reduction = 75.00%
+3) Distribution of selected k (Adaptive-k, over retrieval calls)
+   k=8   :    2  (100.0%)
+4) Distribution of stop reasons (Adaptive-k, over retrieval calls)
+   stagnation:novelty_saturated    :    2  (100.0%)
+5) Non-inferiority of Adaptive-k vs Fixed-k (one-sided alpha = 0.025)
+   Accuracy difference (Adaptive - Fixed): +0.00 pp
+   95% CI (Wald)  : [+0.00, +0.00] pp
+   95% CI (Tango) : [-79.35, +79.35] pp
+   margin = 2.0 pp : p(Tango) = 0.4432, p(Wald) = 0.0000  ->  not shown
+   margin = 3.0 pp : p(Tango) = 0.4302, p(Wald) = 0.0000  ->  not shown
+
+==========================================================================
+File: imedrag_round_14440.json  (N = 1 questions, 2 retrieval calls, excluded due to errors = 0)
+==========================================================================
+1) Answer accuracy
+   Fixed-k (baseline): 0.00%  (0/1)  95% CI=[0.00, 79.35]
+   Adaptive-k        : 100.00%  (1/1)  95% CI=[20.65, 100.00]
+   Only baseline correct: 0 | Only adaptive correct: 1 | McNemar p = 1.0000
+2) Average number of documents used
+   Per question  : Fixed-k = 64.00 | Adaptive-k = 16.00 | reduction = 75.00%
+   Per retrieval : Fixed-k = 32.00 | Adaptive-k = 8.00 | reduction = 75.00%
+3) Distribution of selected k (Adaptive-k, over retrieval calls)
+   k=8   :    2  (100.0%)
+4) Distribution of stop reasons (Adaptive-k, over retrieval calls)
+   stagnation:novelty_saturated    :    2  (100.0%)
+5) Non-inferiority of Adaptive-k vs Fixed-k (one-sided alpha = 0.025)
+   Accuracy difference (Adaptive - Fixed): +100.00 pp
+   95% CI (Wald)  : [+100.00, +100.00] pp
+   95% CI (Tango) : [-58.69, +99.90] pp
+   margin = 2.0 pp : p(Tango) = 0.1538, p(Wald) = 0.0000  ->  not shown
+   margin = 3.0 pp : p(Tango) = 0.1514, p(Wald) = 0.0000  ->  not shown
+
+==========================================================================
+File: imedrag_round_15459.json  (N = 1 questions, 2 retrieval calls, excluded due to errors = 0)
+==========================================================================
+1) Answer accuracy
+   Fixed-k (baseline): 100.00%  (1/1)  95% CI=[20.65, 100.00]
+   Adaptive-k        : 0.00%  (0/1)  95% CI=[0.00, 79.35]
+   Only baseline correct: 1 | Only adaptive correct: 0 | McNemar p = 1.0000
+2) Average number of documents used
+   Per question  : Fixed-k = 64.00 | Adaptive-k = 16.00 | reduction = 75.00%
+   Per retrieval : Fixed-k = 32.00 | Adaptive-k = 8.00 | reduction = 75.00%
+3) Distribution of selected k (Adaptive-k, over retrieval calls)
+   k=8   :    2  (100.0%)
+4) Distribution of stop reasons (Adaptive-k, over retrieval calls)
+   clean                           :    1  (50.0%)
+   stagnation:novelty_saturated    :    1  (50.0%)
+5) Non-inferiority of Adaptive-k vs Fixed-k (one-sided alpha = 0.025)
+   Accuracy difference (Adaptive - Fixed): -100.00 pp
+   95% CI (Wald)  : [-100.00, -100.00] pp
+   95% CI (Tango) : [-99.90, +58.69] pp
+   margin = 2.0 pp : p(Tango) = 0.8365, p(Wald) = 1.0000  ->  not shown
+   margin = 3.0 pp : p(Tango) = 0.8341, p(Wald) = 1.0000  ->  not shown
+
+==========================================================================
+File: imedrag_round_2.json  (N = 50 questions, 100 retrieval calls, excluded due to errors = 0)
+==========================================================================
+1) Answer accuracy
+   Fixed-k (baseline): 92.00%  (46/50)  95% CI=[81.16, 96.85]
+   Adaptive-k        : 88.00%  (44/50)  95% CI=[76.19, 94.38]
+   Only baseline correct: 2 | Only adaptive correct: 0 | McNemar p = 0.5000
+2) Average number of documents used
+   Per question  : Fixed-k = 64.00 | Adaptive-k = 16.64 | reduction = 74.00%
+   Per retrieval : Fixed-k = 32.00 | Adaptive-k = 8.32 | reduction = 74.00%
+3) Distribution of selected k (Adaptive-k, over retrieval calls)
+   k=4   :   32  (32.0%)
+   k=8   :   54  (54.0%)
+   k=16  :   11  (11.0%)
+   k=32  :    3  (3.0%)
+4) Distribution of stop reasons (Adaptive-k, over retrieval calls)
+   clean                           :   64  (64.0%)
+   stagnation:novelty_saturated    :   31  (31.0%)
+   stagnation:snapshot_identical   :    3  (3.0%)
+   max_k                           :    2  (2.0%)
+5) Non-inferiority of Adaptive-k vs Fixed-k (one-sided alpha = 0.025)
+   Accuracy difference (Adaptive - Fixed): -4.00 pp
+   95% CI (Wald)  : [-9.43, +1.43] pp
+   95% CI (Tango) : [-13.46, +3.42] pp
+   margin = 2.0 pp : p(Tango) = 0.8389, p(Wald) = 0.7648  ->  not shown
+   margin = 3.0 pp : p(Tango) = 0.6608, p(Wald) = 0.6409  ->  not shown
+
+==========================================================================
+File: imedrag_round_3.json  (N = 50 questions, 98 retrieval calls, excluded due to errors = 0)
+==========================================================================
+1) Answer accuracy
+   Fixed-k (baseline): 84.00%  (42/50)  95% CI=[71.49, 91.66]
+   Adaptive-k        : 80.00%  (40/50)  95% CI=[66.96, 88.76]
+   Only baseline correct: 2 | Only adaptive correct: 0 | McNemar p = 0.5000
+2) Average number of documents used
+   Per question  : Fixed-k = 62.72 | Adaptive-k = 18.08 | reduction = 71.17%
+   Per retrieval : Fixed-k = 32.00 | Adaptive-k = 9.22 | reduction = 71.17%
+3) Distribution of selected k (Adaptive-k, over retrieval calls)
+   k=4   :   26  (26.5%)
+   k=8   :   58  (59.2%)
+   k=16  :    7  (7.1%)
+   k=32  :    7  (7.1%)
+4) Distribution of stop reasons (Adaptive-k, over retrieval calls)
+   clean                           :   59  (60.2%)
+   stagnation:novelty_saturated    :   31  (31.6%)
+   stagnation:snapshot_identical   :    5  (5.1%)
+   max_k                           :    3  (3.1%)
+5) Non-inferiority of Adaptive-k vs Fixed-k (one-sided alpha = 0.025)
+   Accuracy difference (Adaptive - Fixed): -4.00 pp
+   95% CI (Wald)  : [-9.43, +1.43] pp
+   95% CI (Tango) : [-13.46, +3.42] pp
+   margin = 2.0 pp : p(Tango) = 0.8389, p(Wald) = 0.7648  ->  not shown
+   margin = 3.0 pp : p(Tango) = 0.6608, p(Wald) = 0.6409  ->  not shown
+
+==========================================================================
+File: imedrag_round_4.json  (N = 48 questions, 96 retrieval calls, excluded due to errors = 2)
+==========================================================================
+1) Answer accuracy
+   Fixed-k (baseline): 89.58%  (43/48)  95% CI=[77.83, 95.47]
+   Adaptive-k        : 93.75%  (45/48)  95% CI=[83.16, 97.85]
+   Only baseline correct: 1 | Only adaptive correct: 3 | McNemar p = 0.6250
+2) Average number of documents used
+   Per question  : Fixed-k = 64.00 | Adaptive-k = 18.58 | reduction = 70.96%
+   Per retrieval : Fixed-k = 32.00 | Adaptive-k = 9.29 | reduction = 70.96%
+3) Distribution of selected k (Adaptive-k, over retrieval calls)
+   k=4   :   23  (24.0%)
+   k=8   :   56  (58.3%)
+   k=16  :   12  (12.5%)
+   k=32  :    5  (5.2%)
+4) Distribution of stop reasons (Adaptive-k, over retrieval calls)
+   clean                           :   60  (62.5%)
+   stagnation:novelty_saturated    :   31  (32.3%)
+   stagnation:snapshot_identical   :    3  (3.1%)
+   max_k                           :    2  (2.1%)
+5) Non-inferiority of Adaptive-k vs Fixed-k (one-sided alpha = 0.025)
+   Accuracy difference (Adaptive - Fixed): +4.17 pp
+   95% CI (Wald)  : [-3.91, +12.25] pp
+   95% CI (Tango) : [-5.65, +15.17] pp
+   margin = 2.0 pp : p(Tango) = 0.0825, p(Wald) = 0.0674  ->  not shown
+   margin = 3.0 pp : p(Tango) = 0.0595, p(Wald) = 0.0411  ->  not shown
+
+==========================================================================
+File: imedrag_round_5.json  (N = 50 questions, 100 retrieval calls, excluded due to errors = 0)
+==========================================================================
+1) Answer accuracy
+   Fixed-k (baseline): 92.00%  (46/50)  95% CI=[81.16, 96.85]
+   Adaptive-k        : 86.00%  (43/50)  95% CI=[73.81, 93.05]
+   Only baseline correct: 5 | Only adaptive correct: 2 | McNemar p = 0.4531
+2) Average number of documents used
+   Per question  : Fixed-k = 64.00 | Adaptive-k = 18.40 | reduction = 71.25%
+   Per retrieval : Fixed-k = 32.00 | Adaptive-k = 9.20 | reduction = 71.25%
+3) Distribution of selected k (Adaptive-k, over retrieval calls)
+   k=4   :   24  (24.0%)
+   k=8   :   59  (59.0%)
+   k=16  :   12  (12.0%)
+   k=32  :    5  (5.0%)
+4) Distribution of stop reasons (Adaptive-k, over retrieval calls)
+   clean                           :   59  (59.0%)
+   stagnation:novelty_saturated    :   35  (35.0%)
+   stagnation:snapshot_identical   :    3  (3.0%)
+   max_k                           :    3  (3.0%)
+5) Non-inferiority of Adaptive-k vs Fixed-k (one-sided alpha = 0.025)
+   Accuracy difference (Adaptive - Fixed): -6.00 pp
+   95% CI (Wald)  : [-16.24, +4.24] pp
+   95% CI (Tango) : [-18.24, +5.33] pp
+   margin = 2.0 pp : p(Tango) = 0.7798, p(Wald) = 0.7781  ->  not shown
+   margin = 3.0 pp : p(Tango) = 0.7194, p(Wald) = 0.7171  ->  not shown
+
+==========================================================================
+File: imedrag_round_6.json  (N = 50 questions, 99 retrieval calls, excluded due to errors = 0)
+==========================================================================
+1) Answer accuracy
+   Fixed-k (baseline): 84.00%  (42/50)  95% CI=[71.49, 91.66]
+   Adaptive-k        : 88.00%  (44/50)  95% CI=[76.19, 94.38]
+   Only baseline correct: 1 | Only adaptive correct: 3 | McNemar p = 0.6250
+2) Average number of documents used
+   Per question  : Fixed-k = 63.36 | Adaptive-k = 18.96 | reduction = 70.08%
+   Per retrieval : Fixed-k = 32.00 | Adaptive-k = 9.58 | reduction = 70.08%
+3) Distribution of selected k (Adaptive-k, over retrieval calls)
+   k=4   :   27  (27.3%)
+   k=8   :   53  (53.5%)
+   k=16  :   12  (12.1%)
+   k=32  :    7  (7.1%)
+4) Distribution of stop reasons (Adaptive-k, over retrieval calls)
+   clean                           :   64  (64.6%)
+   stagnation:novelty_saturated    :   32  (32.3%)
+   stagnation:snapshot_identical   :    2  (2.0%)
+   max_k                           :    1  (1.0%)
+5) Non-inferiority of Adaptive-k vs Fixed-k (one-sided alpha = 0.025)
+   Accuracy difference (Adaptive - Fixed): +4.00 pp
+   95% CI (Wald)  : [-3.76, +11.76] pp
+   95% CI (Tango) : [-5.44, +14.61] pp
+   margin = 2.0 pp : p(Tango) = 0.0804, p(Wald) = 0.0649  ->  not shown
+   margin = 3.0 pp : p(Tango) = 0.0572, p(Wald) = 0.0385  ->  not shown
+
+==========================================================================
+File: imedrag_round_7.json  (N = 50 questions, 100 retrieval calls, excluded due to errors = 0)
+==========================================================================
+1) Answer accuracy
+   Fixed-k (baseline): 72.00%  (36/50)  95% CI=[58.33, 82.53]
+   Adaptive-k        : 76.00%  (38/50)  95% CI=[62.59, 85.70]
+   Only baseline correct: 2 | Only adaptive correct: 4 | McNemar p = 0.6875
+2) Average number of documents used
+   Per question  : Fixed-k = 64.00 | Adaptive-k = 17.84 | reduction = 72.12%
+   Per retrieval : Fixed-k = 32.00 | Adaptive-k = 8.92 | reduction = 72.12%
+3) Distribution of selected k (Adaptive-k, over retrieval calls)
+   k=4   :   29  (29.0%)
+   k=8   :   57  (57.0%)
+   k=16  :    8  (8.0%)
+   k=32  :    6  (6.0%)
+4) Distribution of stop reasons (Adaptive-k, over retrieval calls)
+   clean                           :   65  (65.0%)
+   stagnation:novelty_saturated    :   26  (26.0%)
+   max_k                           :    5  (5.0%)
+   stagnation:snapshot_identical   :    4  (4.0%)
+5) Non-inferiority of Adaptive-k vs Fixed-k (one-sided alpha = 0.025)
+   Accuracy difference (Adaptive - Fixed): +4.00 pp
+   95% CI (Wald)  : [-5.54, +13.54] pp
+   95% CI (Tango) : [-6.95, +15.68] pp
+   margin = 2.0 pp : p(Tango) = 0.1176, p(Wald) = 0.1088  ->  not shown
+   margin = 3.0 pp : p(Tango) = 0.0872, p(Wald) = 0.0751  ->  not shown
+
+==========================================================================
+File: imedrag_round_8.json  (N = 50 questions, 100 retrieval calls, excluded due to errors = 0)
+==========================================================================
+1) Answer accuracy
+   Fixed-k (baseline): 86.00%  (43/50)  95% CI=[73.81, 93.05]
+   Adaptive-k        : 88.00%  (44/50)  95% CI=[76.19, 94.38]
+   Only baseline correct: 1 | Only adaptive correct: 2 | McNemar p = 1.0000
+2) Average number of documents used
+   Per question  : Fixed-k = 64.00 | Adaptive-k = 17.36 | reduction = 72.88%
+   Per retrieval : Fixed-k = 32.00 | Adaptive-k = 8.68 | reduction = 72.88%
+3) Distribution of selected k (Adaptive-k, over retrieval calls)
+   k=4   :   23  (23.0%)
+   k=8   :   65  (65.0%)
+   k=16  :    8  (8.0%)
+   k=32  :    4  (4.0%)
+4) Distribution of stop reasons (Adaptive-k, over retrieval calls)
+   clean                           :   50  (50.0%)
+   stagnation:novelty_saturated    :   43  (43.0%)
+   stagnation:snapshot_identical   :    5  (5.0%)
+   max_k                           :    2  (2.0%)
+5) Non-inferiority of Adaptive-k vs Fixed-k (one-sided alpha = 0.025)
+   Accuracy difference (Adaptive - Fixed): +2.00 pp
+   95% CI (Wald)  : [-4.77, +8.77] pp
+   95% CI (Tango) : [-7.11, +11.82] pp
+   margin = 2.0 pp : p(Tango) = 0.1429, p(Wald) = 0.1233  ->  not shown
+   margin = 3.0 pp : p(Tango) = 0.1014, p(Wald) = 0.0738  ->  not shown
+
+==========================================================================
+File: imedrag_round_9.json  (N = 48 questions, 96 retrieval calls, excluded due to errors = 2)
+==========================================================================
+1) Answer accuracy
+   Fixed-k (baseline): 87.50%  (42/48)  95% CI=[75.30, 94.14]
+   Adaptive-k        : 87.50%  (42/48)  95% CI=[75.30, 94.14]
+   Only baseline correct: 1 | Only adaptive correct: 1 | McNemar p = 1.0000
+2) Average number of documents used
+   Per question  : Fixed-k = 64.00 | Adaptive-k = 17.25 | reduction = 73.05%
+   Per retrieval : Fixed-k = 32.00 | Adaptive-k = 8.62 | reduction = 73.05%
+3) Distribution of selected k (Adaptive-k, over retrieval calls)
+   k=4   :   27  (28.1%)
+   k=8   :   58  (60.4%)
+   k=16  :    6  (6.2%)
+   k=32  :    5  (5.2%)
+4) Distribution of stop reasons (Adaptive-k, over retrieval calls)
+   clean                           :   59  (61.5%)
+   stagnation:novelty_saturated    :   37  (38.5%)
+5) Non-inferiority of Adaptive-k vs Fixed-k (one-sided alpha = 0.025)
+   Accuracy difference (Adaptive - Fixed): +0.00 pp
+   95% CI (Wald)  : [-5.77, +5.77] pp
+   95% CI (Tango) : [-9.14, +9.14] pp
+   margin = 2.0 pp : p(Tango) = 0.2657, p(Wald) = 0.2486  ->  not shown
+   margin = 3.0 pp : p(Tango) = 0.1898, p(Wald) = 0.1543  ->  not shown
+
+==========================================================================
+Pooled over all files  (N = 500 questions, 997 retrieval calls, excluded due to errors = 5)
+==========================================================================
+1) Answer accuracy
+   Fixed-k (baseline): 86.00%  (430/500)  95% CI=[82.68, 88.77]
+   Adaptive-k        : 86.80%  (434/500)  95% CI=[83.55, 89.49]
+   Only baseline correct: 17 | Only adaptive correct: 21 | McNemar p = 0.6271
+2) Average number of documents used
+   Per question  : Fixed-k = 63.81 | Adaptive-k = 17.89 | reduction = 71.97%
+   Per retrieval : Fixed-k = 32.00 | Adaptive-k = 8.97 | reduction = 71.97%
+3) Distribution of selected k (Adaptive-k, over retrieval calls)
+   k=4   :  264  (26.5%)
+   k=8   :  582  (58.4%)
+   k=16  :  100  (10.0%)
+   k=32  :   51  (5.1%)
+4) Distribution of stop reasons (Adaptive-k, over retrieval calls)
+   clean                           :  595  (59.7%)
+   stagnation:novelty_saturated    :  348  (34.9%)
+   stagnation:snapshot_identical   :   32  (3.2%)
+   max_k                           :   22  (2.2%)
+5) Non-inferiority of Adaptive-k vs Fixed-k (one-sided alpha = 0.025)
+   Accuracy difference (Adaptive - Fixed): +0.80 pp
+   95% CI (Wald)  : [-1.62, +3.22] pp
+   95% CI (Tango) : [-1.69, +3.34] pp
+   margin = 2.0 pp : p(Tango) = 0.0143, p(Wald) = 0.0115  ->  NON-INFERIOR
+   margin = 3.0 pp : p(Tango) = 0.0020, p(Wald) = 0.0010  ->  NON-INFERIOR
+
+==========================================================================
+Mean +/- std across 15 files
+==========================================================================
+Accuracy Fixed-k             : 84.06 +/- 24.59
+Accuracy Adaptive-k          : 84.61 +/- 24.51
+Docs/question Adaptive-k     : 16.75 +/- 2.79
+Docs/question reduction (%)  : 73.77 +/- 4.41
+Docs/retrieval Adaptive-k    : 8.39 +/- 1.41
+Docs/retrieval reduction (%) : 73.77 +/- 4.41
+
+Outputs saved to 'report_out'.

@@ -1,0 +1,3 @@
+﻿round,method,n_completed,correct,accuracy,accuracy_ci_low,accuracy_ci_high,unparsed,errors,mean_latency_sec,total_latency_sec,judge_calls,mean_selected_k
+14440,baseline_k32,1,0,0.0,0.0,0.7934567085261071,0,0,53.862,53.862,0,
+14440,adaptive_4_8_16_32,1,1,1.0,0.20654329147389294,1.0,0,0,79.896,79.896,4,8.0

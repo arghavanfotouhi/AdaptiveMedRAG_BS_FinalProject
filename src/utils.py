@@ -1,12 +1,18 @@
-
 from sentence_transformers.models import Transformer, Pooling
 from sentence_transformers import SentenceTransformer
 import os
+import sys
 import faiss
 import json
 import torch
 import tqdm
 import numpy as np
+import requests
+import zipfile
+import tarfile
+import json
+import re
+
 
 corpus_names = {
     "PubMed": ["pubmed"],
@@ -25,6 +31,72 @@ retriever_names = {
     "RRF-2": ["bm25", "ncbi/MedCPT-Query-Encoder"],
     "RRF-4": ["bm25", "facebook/contriever", "allenai/specter", "ncbi/MedCPT-Query-Encoder"]
 }
+
+
+# ---------------------------------------------------------------------------
+# Windows-friendly helpers (replace wget / unzip / tar / rm shell commands)
+# ---------------------------------------------------------------------------
+
+def download_file(url, dest_path, chunk_size=8192):
+    """Cross-platform replacement for `wget -O dest_path url`."""
+    dest_dir = os.path.dirname(dest_path)
+    if dest_dir and not os.path.exists(dest_dir):
+        os.makedirs(dest_dir, exist_ok=True)
+    print(f"Downloading {url} -> {dest_path}")
+    with requests.get(url, stream=True) as r:
+        r.raise_for_status()
+        total = int(r.headers.get("content-length", 0))
+        with open(dest_path, "wb") as f, tqdm.tqdm(
+            total=total, unit="B", unit_scale=True, desc=os.path.basename(dest_path)
+        ) as pbar:
+            for chunk in r.iter_content(chunk_size=chunk_size):
+                if chunk:
+                    f.write(chunk)
+                    pbar.update(len(chunk))
+
+
+def extract_zip(zip_path, dest_dir):
+    """Cross-platform replacement for `unzip zip_path -d dest_dir`."""
+    if dest_dir and not os.path.exists(dest_dir):
+        os.makedirs(dest_dir, exist_ok=True)
+    print(f"Extracting {zip_path} -> {dest_dir}")
+    with zipfile.ZipFile(zip_path, "r") as z:
+        z.extractall(dest_dir)
+
+
+def extract_tar_gz(tar_path, dest_dir):
+    """Cross-platform replacement for `tar -xzvf tar_path -C dest_dir`."""
+    if dest_dir and not os.path.exists(dest_dir):
+        os.makedirs(dest_dir, exist_ok=True)
+    print(f"Extracting {tar_path} -> {dest_dir}")
+    with tarfile.open(tar_path, "r:gz") as t:
+        t.extractall(dest_dir)
+
+
+def remove_file(path):
+    """Cross-platform replacement for `rm path`."""
+    if os.path.exists(path):
+        os.remove(path)
+
+
+def run_python_script(script_path, cwd=None):
+    """Cross-platform replacement for `python script_path`.
+
+    Uses sys.executable so it works regardless of what 'python' resolves to
+    (or whether 'python' is even on PATH, as is common on Windows/venvs).
+    """
+    cmd = f'"{sys.executable}" "{script_path}"'
+    ret = os.system(cmd) if cwd is None else os.system(cmd)
+    return ret
+
+
+def git_clone(url, dest_path):
+    """Wraps git clone; requires Git for Windows (or any git) to be on PATH."""
+    os.system(f'git clone "{url}" "{dest_path}"')
+
+
+# ---------------------------------------------------------------------------
+
 
 def ends_with_ending_punctuation(s):
     ending_punctuation = ('.', '?', '!')
@@ -82,9 +154,9 @@ def embed(chunk_dir, index_dir, model_name, **kwarg):
             save_path = os.path.join(save_dir, fname.replace(".jsonl", ".npy"))
             if os.path.exists(save_path):
                 continue
-            if open(fpath).read().strip() == "":
+            if open(fpath, encoding="utf-8").read().strip() == "":
                 continue
-            texts = [json.loads(item) for item in open(fpath).read().strip().split('\n')]
+            texts = [json.loads(item) for item in open(fpath, encoding="utf-8").read().strip().split('\n')]
             if "specter" in model_name.lower():
                 texts = [model.tokenizer.sep_token.join([item["title"], item["content"]]) for item in texts]
             elif "contriever" in model_name.lower():
@@ -100,7 +172,7 @@ def embed(chunk_dir, index_dir, model_name, **kwarg):
 
 def construct_index(index_dir, model_name, h_dim=768, HNSW=False, M=32):
 
-    with open(os.path.join(index_dir, "metadatas.jsonl"), 'w') as f:
+    with open(os.path.join(index_dir, "metadatas.jsonl"), 'w', encoding="utf-8") as f:
         f.write("")
     
     if HNSW:
@@ -119,14 +191,40 @@ def construct_index(index_dir, model_name, h_dim=768, HNSW=False, M=32):
     for fname in tqdm.tqdm(sorted(os.listdir(os.path.join(index_dir, "embedding")))):
         curr_embed = np.load(os.path.join(index_dir, "embedding", fname))
         index.add(curr_embed)
-        with open(os.path.join(index_dir, "metadatas.jsonl"), 'a+') as f:
+        with open(os.path.join(index_dir, "metadatas.jsonl"), 'a+', encoding="utf-8") as f:
             f.write("\n".join([json.dumps({'index': i, 'source': fname.replace(".npy", "")}) for i in range(len(curr_embed))]) + '\n')
 
     faiss.write_index(index, os.path.join(index_dir, "faiss.index"))
     return index
 
 
-class Retriever: 
+# Direct-download URLs for the pre-computed embeddings, keyed by
+# (corpus_name, retriever_name) -> url. Kept as a lookup table so the
+# Windows-safe download_file() helper can be called without long if/elif
+# chains in __init__.
+_EMBEDDING_URLS = {
+    ("textbooks", "allenai/specter"):
+        "https://myuva-my.sharepoint.com/:u:/g/personal/hhu4zu_virginia_edu/EYRRpJbNDyBOmfzCOqfQzrsBwUX0_UT8-j_geDPcVXFnig?download=1",
+    ("textbooks", "facebook/contriever"):
+        "https://myuva-my.sharepoint.com/:u:/g/personal/hhu4zu_virginia_edu/EQqzldVMCCVIpiFV4goC7qEBSkl8kj5lQHtNq8DvHJdAfw?download=1",
+    ("textbooks", "ncbi/MedCPT-Query-Encoder"):
+        "https://myuva-my.sharepoint.com/:u:/g/personal/hhu4zu_virginia_edu/EQ8uXe4RiqJJm0Tmnx7fUUkBKKvTwhu9AqecPA3ULUxUqQ?download=1",
+    ("pubmed", "allenai/specter"):
+        "https://myuva-my.sharepoint.com/:u:/g/personal/hhu4zu_virginia_edu/Ebz8ySXt815FotxC1KkDbuABNycudBCoirTWkKfl8SEswA?download=1",
+    ("pubmed", "facebook/contriever"):
+        "https://myuva-my.sharepoint.com/:u:/g/personal/hhu4zu_virginia_edu/EWecRNfTxbRMnM0ByGMdiAsBJbGJOX_bpnUoyXY9Bj4_jQ?download=1",
+    ("pubmed", "ncbi/MedCPT-Query-Encoder"):
+        "https://myuva-my.sharepoint.com/:u:/g/personal/hhu4zu_virginia_edu/EVCuryzOqy5Am5xzRu6KJz4B6dho7Tv7OuTeHSh3zyrOAw?download=1",
+    ("wikipedia", "allenai/specter"):
+        "https://myuva-my.sharepoint.com/:u:/g/personal/hhu4zu_virginia_edu/Ed7zG3_ce-JOmGTbgof3IK0BdD40XcuZ7AGZRcV_5D2jkA?download=1",
+    ("wikipedia", "facebook/contriever"):
+        "https://myuva-my.sharepoint.com/:u:/g/personal/hhu4zu_virginia_edu/ETKHGV9_KNBPmDM60MWjEdsBXR4P4c7zZk1HLLc0KVaTJw?download=1",
+    ("wikipedia", "ncbi/MedCPT-Query-Encoder"):
+        "https://myuva-my.sharepoint.com/:u:/g/personal/hhu4zu_virginia_edu/EXoxEANb_xBFm6fa2VLRmAcBIfCuTL-5VH6vl4GxJ06oCQ?download=1",
+}
+
+
+class Retriever:
 
     def __init__(self, retriever_name="ncbi/MedCPT-Query-Encoder", corpus_name="textbooks", db_dir="./corpus", HNSW=False, **kwarg):
         self.retriever_name = retriever_name
@@ -138,55 +236,53 @@ class Retriever:
         self.chunk_dir = os.path.join(self.db_dir, self.corpus_name, "chunk")
         if not os.path.exists(self.chunk_dir):
             print("Cloning the {:s} corpus from Huggingface...".format(self.corpus_name))
-            os.system("git clone https://huggingface.co/datasets/MedRAG/{:s} {:s}".format(corpus_name, os.path.join(self.db_dir, self.corpus_name)))
+            git_clone(
+                "https://huggingface.co/datasets/MedRAG/{:s}".format(corpus_name),
+                os.path.join(self.db_dir, self.corpus_name)
+            )
             if self.corpus_name == "statpearls":
                 print("Downloading the statpearls corpus from NCBI bookshelf...")
-                os.system("wget https://ftp.ncbi.nlm.nih.gov/pub/litarch/3d/12/statpearls_NBK430685.tar.gz -P {:s}".format(os.path.join(self.db_dir, self.corpus_name)))
-                os.system("tar -xzvf {:s} -C {:s}".format(os.path.join(db_dir, self.corpus_name, "statpearls_NBK430685.tar.gz"), os.path.join(self.db_dir, self.corpus_name)))
+                tar_path = os.path.join(self.db_dir, self.corpus_name, "statpearls_NBK430685.tar.gz")
+                download_file(
+                    "https://ftp.ncbi.nlm.nih.gov/pub/litarch/3d/12/statpearls_NBK430685.tar.gz",
+                    tar_path
+                )
+                extract_tar_gz(tar_path, os.path.join(self.db_dir, self.corpus_name))
                 print("Chunking the statpearls corpus...")
-                os.system("python src/data/statpearls.py")
+                run_python_script(os.path.join("src", "data", "statpearls.py"))
         self.index_dir = os.path.join(self.db_dir, self.corpus_name, "index", self.retriever_name.replace("Query-Encoder", "Article-Encoder"))
         if "bm25" in self.retriever_name.lower():
+            # NOTE: BM25 requires pyserini, which needs a JDK and is difficult
+            # to install natively on Windows. Prefer running this branch
+            # inside WSL2, or use the MedCPT / Contriever / SPECTER retrievers
+            # instead on native Windows.
             from pyserini.search.lucene import LuceneSearcher
             self.metadatas = None
             self.embedding_function = None
             if os.path.exists(self.index_dir):
                 self.index = LuceneSearcher(os.path.join(self.index_dir))
             else:
-                os.system("python -m pyserini.index.lucene --collection JsonCollection --input {:s} --index {:s} --generator DefaultLuceneDocumentGenerator --threads 16".format(self.chunk_dir, self.index_dir))
+                os.system(
+                    'python -m pyserini.index.lucene --collection JsonCollection '
+                    '--input "{:s}" --index "{:s}" --generator DefaultLuceneDocumentGenerator --threads 16'.format(
+                        self.chunk_dir, self.index_dir
+                    )
+                )
                 self.index = LuceneSearcher(os.path.join(self.index_dir))
         else:
             if os.path.exists(os.path.join(self.index_dir, "faiss.index")):
                 self.index = faiss.read_index(os.path.join(self.index_dir, "faiss.index"))
-                self.metadatas = [json.loads(line) for line in open(os.path.join(self.index_dir, "metadatas.jsonl")).read().strip().split('\n')]
+                self.metadatas = [json.loads(line) for line in open(os.path.join(self.index_dir, "metadatas.jsonl"), encoding="utf-8").read().strip().split('\n')]
             else:
                 print("[In progress] Embedding the {:s} corpus with the {:s} retriever...".format(self.corpus_name, self.retriever_name.replace("Query-Encoder", "Article-Encoder")))
-                if self.corpus_name in ["textbooks", "pubmed", "wikipedia"] and self.retriever_name in ["allenai/specter", "facebook/contriever", "ncbi/MedCPT-Query-Encoder"] and not os.path.exists(os.path.join(self.index_dir, "embedding")):
+                url = _EMBEDDING_URLS.get((self.corpus_name, self.retriever_name))
+                if self.corpus_name in ["textbooks", "pubmed", "wikipedia"] and url is not None and not os.path.exists(os.path.join(self.index_dir, "embedding")):
                     print("[In progress] Downloading the {:s} embeddings given by the {:s} model...".format(self.corpus_name, self.retriever_name.replace("Query-Encoder", "Article-Encoder")))
                     os.makedirs(self.index_dir, exist_ok=True)
-                    if self.corpus_name == "textbooks":
-                        if self.retriever_name == "allenai/specter":
-                            os.system("wget -O {:s} https://myuva-my.sharepoint.com/:u:/g/personal/hhu4zu_virginia_edu/EYRRpJbNDyBOmfzCOqfQzrsBwUX0_UT8-j_geDPcVXFnig?download=1".format(os.path.join(self.index_dir, "embedding.zip")))
-                        elif self.retriever_name == "facebook/contriever":
-                            os.system("wget -O {:s} https://myuva-my.sharepoint.com/:u:/g/personal/hhu4zu_virginia_edu/EQqzldVMCCVIpiFV4goC7qEBSkl8kj5lQHtNq8DvHJdAfw?download=1".format(os.path.join(self.index_dir, "embedding.zip")))
-                        elif self.retriever_name == "ncbi/MedCPT-Query-Encoder":
-                            os.system("wget -O {:s} https://myuva-my.sharepoint.com/:u:/g/personal/hhu4zu_virginia_edu/EQ8uXe4RiqJJm0Tmnx7fUUkBKKvTwhu9AqecPA3ULUxUqQ?download=1".format(os.path.join(self.index_dir, "embedding.zip")))
-                    elif self.corpus_name == "pubmed":
-                        if self.retriever_name == "allenai/specter":
-                            os.system("wget -O {:s} https://myuva-my.sharepoint.com/:u:/g/personal/hhu4zu_virginia_edu/Ebz8ySXt815FotxC1KkDbuABNycudBCoirTWkKfl8SEswA?download=1".format(os.path.join(self.index_dir, "embedding.zip")))
-                        elif self.retriever_name == "facebook/contriever":
-                            os.system("wget -O {:s} https://myuva-my.sharepoint.com/:u:/g/personal/hhu4zu_virginia_edu/EWecRNfTxbRMnM0ByGMdiAsBJbGJOX_bpnUoyXY9Bj4_jQ?download=1".format(os.path.join(self.index_dir, "embedding.zip")))
-                        elif self.retriever_name == "ncbi/MedCPT-Query-Encoder":
-                            os.system("wget -O {:s} https://myuva-my.sharepoint.com/:u:/g/personal/hhu4zu_virginia_edu/EVCuryzOqy5Am5xzRu6KJz4B6dho7Tv7OuTeHSh3zyrOAw?download=1".format(os.path.join(self.index_dir, "embedding.zip")))
-                    elif self.corpus_name == "wikipedia":
-                        if self.retriever_name == "allenai/specter":
-                            os.system("wget -O {:s} https://myuva-my.sharepoint.com/:u:/g/personal/hhu4zu_virginia_edu/Ed7zG3_ce-JOmGTbgof3IK0BdD40XcuZ7AGZRcV_5D2jkA?download=1".format(os.path.join(self.index_dir, "embedding.zip")))
-                        elif self.retriever_name == "facebook/contriever":
-                            os.system("wget -O {:s} https://myuva-my.sharepoint.com/:u:/g/personal/hhu4zu_virginia_edu/ETKHGV9_KNBPmDM60MWjEdsBXR4P4c7zZk1HLLc0KVaTJw?download=1".format(os.path.join(self.index_dir, "embedding.zip")))
-                        elif self.retriever_name == "ncbi/MedCPT-Query-Encoder":
-                            os.system("wget -O {:s} https://myuva-my.sharepoint.com/:u:/g/personal/hhu4zu_virginia_edu/EXoxEANb_xBFm6fa2VLRmAcBIfCuTL-5VH6vl4GxJ06oCQ?download=1".format(os.path.join(self.index_dir, "embedding.zip")))
-                    os.system("unzip {:s} -d {:s}".format(os.path.join(self.index_dir, "embedding.zip"), self.index_dir))
-                    os.system("rm {:s}".format(os.path.join(self.index_dir, "embedding.zip")))
+                    zip_path = os.path.join(self.index_dir, "embedding.zip")
+                    download_file(url, zip_path)
+                    extract_zip(zip_path, self.index_dir)
+                    remove_file(zip_path)
                     h_dim = 768
                 else:
                     h_dim = embed(chunk_dir=self.chunk_dir, index_dir=self.index_dir, model_name=self.retriever_name.replace("Query-Encoder", "Article-Encoder"), **kwarg)
@@ -194,7 +290,7 @@ class Retriever:
                 print("[In progress] Embedding finished! The dimension of the embeddings is {:d}.".format(h_dim))
                 self.index = construct_index(index_dir=self.index_dir, model_name=self.retriever_name.replace("Query-Encoder", "Article-Encoder"), h_dim=h_dim, HNSW=HNSW)
                 print("[Finished] Corpus indexing finished!")
-                self.metadatas = [json.loads(line) for line in open(os.path.join(self.index_dir, "metadatas.jsonl")).read().strip().split('\n')]            
+                self.metadatas = [json.loads(line) for line in open(os.path.join(self.index_dir, "metadatas.jsonl"), encoding="utf-8").read().strip().split('\n')]
             if "contriever" in self.retriever_name.lower():
                 self.embedding_function = SentenceTransformer(self.retriever_name, device="cuda" if torch.cuda.is_available() else "cpu")
             else:
@@ -225,12 +321,77 @@ class Retriever:
         else:
             return self.idx2txt(indices), scores
 
+    def get_relevant_documents_with_embeddings(
+        self,
+        question,
+        k=32,
+        **kwarg
+    ):
+            assert isinstance(question, str)
+
+            # ---------------------------------------------------------
+            # Encode the QUESTION only
+            # ---------------------------------------------------------
+            questions = [question]
+
+            with torch.no_grad():
+                query_embed = self.embedding_function.encode(
+                    questions,
+                    **kwarg
+                )
+
+            # ---------------------------------------------------------
+            # Search FAISS
+            # ---------------------------------------------------------
+            scores, faiss_indices = self.index.search(
+                query_embed,
+                k
+            )
+
+            faiss_indices = faiss_indices[0]
+            scores = scores[0].tolist()
+
+            # ---------------------------------------------------------
+            # Retrieve metadata using GLOBAL FAISS indices
+            # ---------------------------------------------------------
+            metadata = [
+                self.metadatas[int(i)]
+                for i in faiss_indices
+            ]
+
+            # ---------------------------------------------------------
+            # Retrieve actual text documents
+            # ---------------------------------------------------------
+            documents = self.idx2txt(metadata)
+
+            # ---------------------------------------------------------
+            # Recover the EXACT stored document embeddings
+            #    from FAISS
+            # ---------------------------------------------------------
+            embeddings = np.vstack([
+                self.index.reconstruct(int(i))
+                for i in faiss_indices
+            ]).astype(np.float32)
+
+            # ---------------------------------------------------------
+            # Create stable document IDs
+            # ---------------------------------------------------------
+            ids = [
+                "_".join([
+                    item["source"],
+                    str(item["index"])
+                ])
+                for item in metadata
+            ]
+
+            return documents, scores, ids, embeddings
+
     def idx2txt(self, indices): # return List of Dict of str
         '''
         Input: List of Dict( {"source": str, "index": int} )
         Output: List of str
         '''
-        return [json.loads(open(os.path.join(self.chunk_dir, i["source"]+".jsonl")).read().strip().split('\n')[i["index"]]) for i in indices]
+        return [json.loads(open(os.path.join(self.chunk_dir, i["source"]+".jsonl"), encoding="utf-8").read().strip().split('\n')[i["index"]]) for i in indices]
 
 class RetrievalSystem:
 
@@ -249,6 +410,69 @@ class RetrievalSystem:
             self.docExt = DocExtracter(cache=True, corpus_name=self.corpus_name, db_dir=db_dir)
         else:
             self.docExt = None
+
+    def retrieve_with_embeddings(
+        self,
+        question,
+        k=32,
+        rrf_k=100,
+        **kwarg
+        ):
+        """
+        Retrieve documents together with their stored document embeddings.
+
+        Currently designed for a single dense retriever/corpus configuration
+        such as MedCPT + Textbooks, MedCPT + PubMed, etc.
+
+        Returns:
+            texts
+            scores
+            ids
+            embeddings
+        """
+
+        assert isinstance(question, str)
+
+        # ---------------------------------------------------------
+        # This method is safe only when exactly one retriever and
+        # one corpus are active.
+        #
+        # For RRF-2 / RRF-4, different retrievers have different
+        # embedding spaces, so we must not mix their embeddings.
+        # ---------------------------------------------------------
+        if len(self.retrievers) != 1:
+            raise ValueError(
+                "retrieve_with_embeddings() currently requires "
+                "exactly one retriever. RRF configurations need "
+                "a separate provenance-aware implementation."
+            )
+
+        if len(self.retrievers[0]) != 1:
+            raise ValueError(
+                "retrieve_with_embeddings() currently requires "
+                "exactly one corpus. Multi-corpus retrieval needs "
+                "a separate provenance-aware implementation."
+            )
+
+        retriever = self.retrievers[0][0]
+
+ 
+        if "bm25" in retriever.retriever_name.lower():
+            raise ValueError(
+                "Document embeddings are not available from BM25. "
+                "Use a dense retriever such as MedCPT."
+            )
+
+
+        texts, scores, ids, embeddings = (
+            retriever.get_relevant_documents_with_embeddings(
+                question,
+                k=k,
+                **kwarg
+            )
+        )
+
+        return texts, scores, ids, embeddings
     
     def retrieve(self, question, k=32, rrf_k=100, id_only=False):
         '''
@@ -330,43 +554,50 @@ class DocExtracter:
         for corpus in corpus_names[corpus_name]:
             if not os.path.exists(os.path.join(self.db_dir, corpus, "chunk")):
                 print("Cloning the {:s} corpus from Huggingface...".format(corpus))
-                os.system("git clone https://huggingface.co/datasets/MedRAG/{:s} {:s}".format(corpus, os.path.join(self.db_dir, corpus)))
+                git_clone(
+                    "https://huggingface.co/datasets/MedRAG/{:s}".format(corpus),
+                    os.path.join(self.db_dir, corpus)
+                )
                 if corpus == "statpearls":
                     print("Downloading the statpearls corpus from NCBI bookshelf...")
-                    os.system("wget https://ftp.ncbi.nlm.nih.gov/pub/litarch/3d/12/statpearls_NBK430685.tar.gz -P {:s}".format(os.path.join(self.db_dir, corpus)))
-                    os.system("tar -xzvf {:s} -C {:s}".format(os.path.join(self.db_dir, corpus, "statpearls_NBK430685.tar.gz"), os.path.join(self.db_dir, corpus)))
+                    tar_path = os.path.join(self.db_dir, corpus, "statpearls_NBK430685.tar.gz")
+                    download_file(
+                        "https://ftp.ncbi.nlm.nih.gov/pub/litarch/3d/12/statpearls_NBK430685.tar.gz",
+                        tar_path
+                    )
+                    extract_tar_gz(tar_path, os.path.join(self.db_dir, corpus))
                     print("Chunking the statpearls corpus...")
-                    os.system("python src/data/statpearls.py")
+                    run_python_script(os.path.join("src", "data", "statpearls.py"))
         if self.cache:
             if os.path.exists(os.path.join(self.db_dir, "_".join([corpus_name, "id2text.json"]))):
-                self.dict = json.load(open(os.path.join(self.db_dir, "_".join([corpus_name, "id2text.json"]))))
+                self.dict = json.load(open(os.path.join(self.db_dir, "_".join([corpus_name, "id2text.json"])), encoding="utf-8"))
             else:
                 self.dict = {}
                 for corpus in corpus_names[corpus_name]:
                     for fname in tqdm.tqdm(sorted(os.listdir(os.path.join(self.db_dir, corpus, "chunk")))):
-                        if open(os.path.join(self.db_dir, corpus, "chunk", fname)).read().strip() == "":
+                        if open(os.path.join(self.db_dir, corpus, "chunk", fname), encoding="utf-8").read().strip() == "":
                             continue
-                        for i, line in enumerate(open(os.path.join(self.db_dir, corpus, "chunk", fname)).read().strip().split('\n')):
+                        for i, line in enumerate(open(os.path.join(self.db_dir, corpus, "chunk", fname), encoding="utf-8").read().strip().split('\n')):
                             item = json.loads(line)
                             _ = item.pop("contents", None)
                             # assert item["id"] not in self.dict
                             self.dict[item["id"]] = item
-                with open(os.path.join(self.db_dir, "_".join([corpus_name, "id2text.json"])), 'w') as f:
+                with open(os.path.join(self.db_dir, "_".join([corpus_name, "id2text.json"])), 'w', encoding="utf-8") as f:
                     json.dump(self.dict, f)
         else:
             if os.path.exists(os.path.join(self.db_dir, "_".join([corpus_name, "id2path.json"]))):
-                self.dict = json.load(open(os.path.join(self.db_dir, "_".join([corpus_name, "id2path.json"]))))
+                self.dict = json.load(open(os.path.join(self.db_dir, "_".join([corpus_name, "id2path.json"])), encoding="utf-8"))
             else:
                 self.dict = {}
                 for corpus in corpus_names[corpus_name]:
                     for fname in tqdm.tqdm(sorted(os.listdir(os.path.join(self.db_dir, corpus, "chunk")))):
-                        if open(os.path.join(self.db_dir, corpus, "chunk", fname)).read().strip() == "":
+                        if open(os.path.join(self.db_dir, corpus, "chunk", fname), encoding="utf-8").read().strip() == "":
                             continue
-                        for i, line in enumerate(open(os.path.join(self.db_dir, corpus, "chunk", fname)).read().strip().split('\n')):
+                        for i, line in enumerate(open(os.path.join(self.db_dir, corpus, "chunk", fname), encoding="utf-8").read().strip().split('\n')):
                             item = json.loads(line)
                             # assert item["id"] not in self.dict
                             self.dict[item["id"]] = {"fpath": os.path.join(corpus, "chunk", fname), "index": i}
-                with open(os.path.join(self.db_dir, "_".join([corpus_name, "id2path.json"])), 'w') as f:
+                with open(os.path.join(self.db_dir, "_".join([corpus_name, "id2path.json"])), 'w', encoding="utf-8") as f:
                     json.dump(self.dict, f, indent=4)
         print("Initialization finished!")
     
@@ -380,5 +611,5 @@ class DocExtracter:
             output = []
             for i in ids:
                 item = self.dict[i] if type(i) == str else self.dict[i["id"]]
-                output.append(json.loads(open(os.path.join(self.db_dir, item["fpath"])).read().strip().split('\n')[item["index"]]))
+                output.append(json.loads(open(os.path.join(self.db_dir, item["fpath"]), encoding="utf-8").read().strip().split('\n')[item["index"]]))
         return output

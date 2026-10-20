@@ -1,0 +1,332 @@
+Loaded 11 file(s), 1000 questions in total.
+Fixed-k (baseline) number of documents = 32
+
+======================================================================
+File: eval_round_test1.json  (N = 100)
+======================================================================
+1) Answer accuracy
+   Fixed-k (baseline): 76.00%  (76/100)  95% CI=[66.77, 83.31]
+   Adaptive-k        : 78.00%  (78/100)  95% CI=[68.93, 85.00]
+   Only baseline correct: 2 | Only adaptive correct: 4 | McNemar p = 0.6875
+2) Average number of documents used
+   Fixed-k  : 32.00
+   Adaptive : 11.36  (median = 8.0)  reduction = 64.50%
+3) Distribution of selected k (Adaptive-k)
+   k=4   :    8  (8.0%)
+   k=8   :   60  (60.0%)
+   k=16  :   25  (25.0%)
+   k=32  :    7  (7.0%)
+4) Distribution of stop reasons (Adaptive-k)
+   clean               :   52  (52.0%)
+   novelty_saturated   :   42  (42.0%)
+   max_k_reached       :    4  (4.0%)
+   snapshot_identical  :    2  (2.0%)
+5) Non-inferiority of Adaptive-k vs Fixed-k (one-sided alpha = 0.025)
+   Accuracy difference (Adaptive - Fixed): +2.00 pp
+   95% CI (Wald)  : [-2.78, +6.78] pp
+   95% CI (Tango) : [-3.59, +8.16] pp
+   margin = 2.0 pp : p(Tango) = 0.0655, p(Wald) = 0.0507  ->  not shown
+   margin = 3.0 pp : p(Tango) = 0.0358, p(Wald) = 0.0203  ->  not shown
+
+======================================================================
+File: eval_round_test10.json  (N = 100)
+======================================================================
+1) Answer accuracy
+   Fixed-k (baseline): 76.00%  (76/100)  95% CI=[66.77, 83.31]
+   Adaptive-k        : 78.00%  (78/100)  95% CI=[68.93, 85.00]
+   Only baseline correct: 4 | Only adaptive correct: 6 | McNemar p = 0.7539
+2) Average number of documents used
+   Fixed-k  : 32.00
+   Adaptive : 12.56  (median = 8.0)  reduction = 60.75%
+3) Distribution of selected k (Adaptive-k)
+   k=4   :    6  (6.0%)
+   k=8   :   60  (60.0%)
+   k=16  :   21  (21.0%)
+   k=32  :   13  (13.0%)
+4) Distribution of stop reasons (Adaptive-k)
+   clean               :   45  (45.0%)
+   novelty_saturated   :   44  (44.0%)
+   max_k_reached       :    7  (7.0%)
+   snapshot_identical  :    4  (4.0%)
+5) Non-inferiority of Adaptive-k vs Fixed-k (one-sided alpha = 0.025)
+   Accuracy difference (Adaptive - Fixed): +2.00 pp
+   95% CI (Wald)  : [-4.19, +8.19] pp
+   95% CI (Tango) : [-4.83, +9.17] pp
+   margin = 2.0 pp : p(Tango) = 0.1100, p(Wald) = 0.1025  ->  not shown
+   margin = 3.0 pp : p(Tango) = 0.0668, p(Wald) = 0.0566  ->  not shown
+
+======================================================================
+File: eval_round_test2.json  (N = 100)
+======================================================================
+1) Answer accuracy
+   Fixed-k (baseline): 81.00%  (81/100)  95% CI=[72.22, 87.49]
+   Adaptive-k        : 81.00%  (81/100)  95% CI=[72.22, 87.49]
+   Only baseline correct: 4 | Only adaptive correct: 4 | McNemar p = 1.0000
+2) Average number of documents used
+   Fixed-k  : 32.00
+   Adaptive : 13.32  (median = 8.0)  reduction = 58.38%
+3) Distribution of selected k (Adaptive-k)
+   k=4   :    7  (7.0%)
+   k=8   :   59  (59.0%)
+   k=16  :   16  (16.0%)
+   k=32  :   18  (18.0%)
+4) Distribution of stop reasons (Adaptive-k)
+   clean               :   48  (48.0%)
+   novelty_saturated   :   39  (39.0%)
+   max_k_reached       :   11  (11.0%)
+   snapshot_identical  :    2  (2.0%)
+5) Non-inferiority of Adaptive-k vs Fixed-k (one-sided alpha = 0.025)
+   Accuracy difference (Adaptive - Fixed): +0.00 pp
+   95% CI (Wald)  : [-5.54, +5.54] pp
+   95% CI (Tango) : [-6.50, +6.50] pp
+   margin = 2.0 pp : p(Tango) = 0.2450, p(Wald) = 0.2398  ->  not shown
+   margin = 3.0 pp : p(Tango) = 0.1565, p(Wald) = 0.1444  ->  not shown
+
+======================================================================
+File: eval_round_test3.json  (N = 100)
+======================================================================
+1) Answer accuracy
+   Fixed-k (baseline): 82.00%  (82/100)  95% CI=[73.33, 88.30]
+   Adaptive-k        : 80.00%  (80/100)  95% CI=[71.12, 86.66]
+   Only baseline correct: 7 | Only adaptive correct: 5 | McNemar p = 0.7744
+2) Average number of documents used
+   Fixed-k  : 32.00
+   Adaptive : 12.36  (median = 8.0)  reduction = 61.38%
+3) Distribution of selected k (Adaptive-k)
+   k=4   :    9  (9.0%)
+   k=8   :   60  (60.0%)
+   k=16  :   17  (17.0%)
+   k=32  :   14  (14.0%)
+4) Distribution of stop reasons (Adaptive-k)
+   clean               :   53  (53.0%)
+   novelty_saturated   :   32  (32.0%)
+   snapshot_identical  :   10  (10.0%)
+   max_k_reached       :    5  (5.0%)
+5) Non-inferiority of Adaptive-k vs Fixed-k (one-sided alpha = 0.025)
+   Accuracy difference (Adaptive - Fixed): -2.00 pp
+   95% CI (Wald)  : [-8.78, +4.78] pp
+   95% CI (Tango) : [-9.63, +5.36] pp
+   margin = 2.0 pp : p(Tango) = 0.5000, p(Wald) = 0.5000  ->  not shown
+   margin = 3.0 pp : p(Tango) = 0.3870, p(Wald) = 0.3862  ->  not shown
+
+======================================================================
+File: eval_round_test4.json  (N = 100)
+======================================================================
+1) Answer accuracy
+   Fixed-k (baseline): 74.00%  (74/100)  95% CI=[64.63, 81.60]
+   Adaptive-k        : 79.00%  (79/100)  95% CI=[70.02, 85.83]
+   Only baseline correct: 3 | Only adaptive correct: 8 | McNemar p = 0.2266
+2) Average number of documents used
+   Fixed-k  : 32.00
+   Adaptive : 11.36  (median = 8.0)  reduction = 64.50%
+3) Distribution of selected k (Adaptive-k)
+   k=4   :   12  (12.0%)
+   k=8   :   62  (62.0%)
+   k=16  :   15  (15.0%)
+   k=32  :   11  (11.0%)
+4) Distribution of stop reasons (Adaptive-k)
+   clean               :   53  (53.0%)
+   novelty_saturated   :   35  (35.0%)
+   snapshot_identical  :    6  (6.0%)
+   max_k_reached       :    6  (6.0%)
+5) Non-inferiority of Adaptive-k vs Fixed-k (one-sided alpha = 0.025)
+   Accuracy difference (Adaptive - Fixed): +5.00 pp
+   95% CI (Wald)  : [-1.43, +11.43] pp
+   95% CI (Tango) : [-1.75, +12.53] pp
+   margin = 2.0 pp : p(Tango) = 0.0216, p(Wald) = 0.0164  ->  NON-INFERIOR
+   margin = 3.0 pp : p(Tango) = 0.0120, p(Wald) = 0.0073  ->  NON-INFERIOR
+
+======================================================================
+File: eval_round_test5.json  (N = 100)
+======================================================================
+1) Answer accuracy
+   Fixed-k (baseline): 78.00%  (78/100)  95% CI=[68.93, 85.00]
+   Adaptive-k        : 76.00%  (76/100)  95% CI=[66.77, 83.31]
+   Only baseline correct: 5 | Only adaptive correct: 3 | McNemar p = 0.7266
+2) Average number of documents used
+   Fixed-k  : 32.00
+   Adaptive : 11.80  (median = 8.0)  reduction = 63.12%
+3) Distribution of selected k (Adaptive-k)
+   k=4   :    7  (7.0%)
+   k=8   :   66  (66.0%)
+   k=16  :   15  (15.0%)
+   k=32  :   12  (12.0%)
+4) Distribution of stop reasons (Adaptive-k)
+   clean               :   51  (51.0%)
+   novelty_saturated   :   41  (41.0%)
+   max_k_reached       :    5  (5.0%)
+   snapshot_identical  :    3  (3.0%)
+5) Non-inferiority of Adaptive-k vs Fixed-k (one-sided alpha = 0.025)
+   Accuracy difference (Adaptive - Fixed): -2.00 pp
+   95% CI (Wald)  : [-7.53, +3.53] pp
+   95% CI (Tango) : [-8.68, +4.25] pp
+   margin = 2.0 pp : p(Tango) = 0.5000, p(Wald) = 0.5000  ->  not shown
+   margin = 3.0 pp : p(Tango) = 0.3638, p(Wald) = 0.3615  ->  not shown
+
+======================================================================
+File: eval_round_test6.json  (N = 100)
+======================================================================
+1) Answer accuracy
+   Fixed-k (baseline): 74.00%  (74/100)  95% CI=[64.63, 81.60]
+   Adaptive-k        : 77.00%  (77/100)  95% CI=[67.85, 84.16]
+   Only baseline correct: 3 | Only adaptive correct: 6 | McNemar p = 0.5078
+2) Average number of documents used
+   Fixed-k  : 32.00
+   Adaptive : 10.96  (median = 8.0)  reduction = 65.75%
+3) Distribution of selected k (Adaptive-k)
+   k=4   :    8  (8.0%)
+   k=8   :   65  (65.0%)
+   k=16  :   20  (20.0%)
+   k=32  :    7  (7.0%)
+4) Distribution of stop reasons (Adaptive-k)
+   clean               :   56  (56.0%)
+   novelty_saturated   :   37  (37.0%)
+   snapshot_identical  :    4  (4.0%)
+   max_k_reached       :    3  (3.0%)
+5) Non-inferiority of Adaptive-k vs Fixed-k (one-sided alpha = 0.025)
+   Accuracy difference (Adaptive - Fixed): +3.00 pp
+   95% CI (Wald)  : [-2.85, +8.85] pp
+   95% CI (Tango) : [-3.41, +9.99] pp
+   margin = 2.0 pp : p(Tango) = 0.0558, p(Wald) = 0.0470  ->  not shown
+   margin = 3.0 pp : p(Tango) = 0.0317, p(Wald) = 0.0222  ->  not shown
+
+======================================================================
+File: eval_round_test7.json  (N = 99)
+======================================================================
+1) Answer accuracy
+   Fixed-k (baseline): 79.80%  (79/99)  95% CI=[70.85, 86.52]
+   Adaptive-k        : 72.73%  (72/99)  95% CI=[63.23, 80.53]
+   Only baseline correct: 8 | Only adaptive correct: 1 | McNemar p = 0.0391
+2) Average number of documents used
+   Fixed-k  : 32.00
+   Adaptive : 11.39  (median = 8)  reduction = 64.39%
+3) Distribution of selected k (Adaptive-k)
+   k=4   :   12  (12.1%)
+   k=8   :   63  (63.6%)
+   k=16  :   12  (12.1%)
+   k=32  :   12  (12.1%)
+4) Distribution of stop reasons (Adaptive-k)
+   clean               :   50  (50.5%)
+   novelty_saturated   :   38  (38.4%)
+   max_k_reached       :    7  (7.1%)
+   snapshot_identical  :    3  (3.0%)
+   plateau             :    1  (1.0%)
+5) Non-inferiority of Adaptive-k vs Fixed-k (one-sided alpha = 0.025)
+   Accuracy difference (Adaptive - Fixed): -7.07 pp
+   95% CI (Wald)  : [-12.84, -1.30] pp
+   95% CI (Tango) : [-14.31, -1.45] pp
+   margin = 2.0 pp : p(Tango) = 0.9640, p(Wald) = 0.9574  ->  not shown
+   margin = 3.0 pp : p(Tango) = 0.9305, p(Wald) = 0.9165  ->  not shown
+
+======================================================================
+File: eval_round_test794.json  (N = 1)
+======================================================================
+1) Answer accuracy
+   Fixed-k (baseline): 0.00%  (0/1)  95% CI=[0.00, 79.35]
+   Adaptive-k        : 0.00%  (0/1)  95% CI=[0.00, 79.35]
+   Only baseline correct: 0 | Only adaptive correct: 0 | McNemar p = 1.0000
+2) Average number of documents used
+   Fixed-k  : 32.00
+   Adaptive : 8.00  (median = 8)  reduction = 75.00%
+3) Distribution of selected k (Adaptive-k)
+   k=8   :    1  (100.0%)
+4) Distribution of stop reasons (Adaptive-k)
+   clean               :    1  (100.0%)
+5) Non-inferiority of Adaptive-k vs Fixed-k (one-sided alpha = 0.025)
+   Accuracy difference (Adaptive - Fixed): +0.00 pp
+   95% CI (Wald)  : [+0.00, +0.00] pp
+   95% CI (Tango) : [-79.35, +79.35] pp
+   margin = 2.0 pp : p(Tango) = 0.4432, p(Wald) = 0.0000  ->  not shown
+   margin = 3.0 pp : p(Tango) = 0.4302, p(Wald) = 0.0000  ->  not shown
+
+======================================================================
+File: eval_round_test8.json  (N = 100)
+======================================================================
+1) Answer accuracy
+   Fixed-k (baseline): 69.00%  (69/100)  95% CI=[59.37, 77.22]
+   Adaptive-k        : 73.00%  (73/100)  95% CI=[63.57, 80.73]
+   Only baseline correct: 2 | Only adaptive correct: 6 | McNemar p = 0.2891
+2) Average number of documents used
+   Fixed-k  : 32.00
+   Adaptive : 11.56  (median = 8.0)  reduction = 63.87%
+3) Distribution of selected k (Adaptive-k)
+   k=4   :   11  (11.0%)
+   k=8   :   63  (63.0%)
+   k=16  :   14  (14.0%)
+   k=32  :   12  (12.0%)
+4) Distribution of stop reasons (Adaptive-k)
+   clean               :   51  (51.0%)
+   novelty_saturated   :   40  (40.0%)
+   max_k_reached       :    6  (6.0%)
+   snapshot_identical  :    3  (3.0%)
+5) Non-inferiority of Adaptive-k vs Fixed-k (one-sided alpha = 0.025)
+   Accuracy difference (Adaptive - Fixed): +4.00 pp
+   95% CI (Wald)  : [-1.49, +9.49] pp
+   95% CI (Tango) : [-1.91, +10.82] pp
+   margin = 2.0 pp : p(Tango) = 0.0237, p(Wald) = 0.0161  ->  NON-INFERIOR
+   margin = 3.0 pp : p(Tango) = 0.0128, p(Wald) = 0.0062  ->  NON-INFERIOR
+
+======================================================================
+File: eval_round_test9.json  (N = 100)
+======================================================================
+1) Answer accuracy
+   Fixed-k (baseline): 76.00%  (76/100)  95% CI=[66.77, 83.31]
+   Adaptive-k        : 75.00%  (75/100)  95% CI=[65.70, 82.45]
+   Only baseline correct: 3 | Only adaptive correct: 2 | McNemar p = 1.0000
+2) Average number of documents used
+   Fixed-k  : 32.00
+   Adaptive : 10.56  (median = 8.0)  reduction = 67.00%
+3) Distribution of selected k (Adaptive-k)
+   k=4   :   12  (12.0%)
+   k=8   :   64  (64.0%)
+   k=16  :   17  (17.0%)
+   k=32  :    7  (7.0%)
+4) Distribution of stop reasons (Adaptive-k)
+   clean               :   49  (49.0%)
+   novelty_saturated   :   46  (46.0%)
+   snapshot_identical  :    3  (3.0%)
+   max_k_reached       :    2  (2.0%)
+5) Non-inferiority of Adaptive-k vs Fixed-k (one-sided alpha = 0.025)
+   Accuracy difference (Adaptive - Fixed): -1.00 pp
+   95% CI (Wald)  : [-5.38, +3.38] pp
+   95% CI (Tango) : [-6.76, +4.44] pp
+   margin = 2.0 pp : p(Tango) = 0.3322, p(Wald) = 0.3272  ->  not shown
+   margin = 3.0 pp : p(Tango) = 0.2046, p(Wald) = 0.1853  ->  not shown
+
+======================================================================
+Pooled over all files  (N = 1000)
+======================================================================
+1) Answer accuracy
+   Fixed-k (baseline): 76.50%  (765/1000)  95% CI=[73.77, 79.02]
+   Adaptive-k        : 76.90%  (769/1000)  95% CI=[74.19, 79.41]
+   Only baseline correct: 41 | Only adaptive correct: 45 | McNemar p = 0.7465
+2) Average number of documents used
+   Fixed-k  : 32.00
+   Adaptive : 11.72  (median = 8.0)  reduction = 63.38%
+3) Distribution of selected k (Adaptive-k)
+   k=4   :   92  (9.2%)
+   k=8   :  623  (62.3%)
+   k=16  :  172  (17.2%)
+   k=32  :  113  (11.3%)
+4) Distribution of stop reasons (Adaptive-k)
+   clean               :  509  (50.9%)
+   novelty_saturated   :  394  (39.4%)
+   max_k_reached       :   56  (5.6%)
+   snapshot_identical  :   40  (4.0%)
+   plateau             :    1  (0.1%)
+5) Non-inferiority of Adaptive-k vs Fixed-k (one-sided alpha = 0.025)
+   Accuracy difference (Adaptive - Fixed): +0.40 pp
+   95% CI (Wald)  : [-1.42, +2.22] pp
+   95% CI (Tango) : [-1.44, +2.26] pp
+   margin = 2.0 pp : p(Tango) = 0.0058, p(Wald) = 0.0048  ->  NON-INFERIOR
+   margin = 3.0 pp : p(Tango) = 0.0002, p(Wald) = 0.0001  ->  NON-INFERIOR
+
+======================================================================
+Mean +/- std across 11 files
+======================================================================
+Accuracy Fixed-k      : 69.62 +/- 23.38
+Accuracy Adaptive-k   : 69.98 +/- 23.36
+Avg docs Adaptive-k   : 11.38 +/- 1.36
+Doc reduction (%)     : 64.42 +/- 4.26
+
+Outputs saved to 'report_out'.
